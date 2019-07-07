@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>映画管理</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--    <style>-->
+<!--        .newArticle{-->
+<!--            margin-bottom: 5px;-->
+<!--        }-->
+<!--    </style>-->
+</head>
+<body>
+<h1>映画管理</h1>
+<!--<a class="newArticle" href="/blogs/create">新規投稿</a>-->
+
+<table class="table table-striped" border="1">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>タイトル</th>
+        <th>作成日時</th>
+        <th>更新日時</th>
+        <th>記事の詳細</th>
+        <th>削除</th>
+    </tr>
+    </thead>
+    <tbody th:remove="all-but-first" th:each="blog: ${blogList}" th:object="${blog}">
+    <tr>
+        <td th:text="${blog['id']}"></td>
+        <td th:text="${blog['title']}"></td>
+        <td th:text="${blog['createdAt']}"></td>
+        <td th:text="${blog['updatedAt']}"></td>
+        <td>
+            <form th:action="@{/blogs/{id}(id=${blog['id']})}" th:method="get">
+                <input type="submit" value="記事の詳細" />
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/blogs/delete/{id}(id=${blog['id']})}" th:method="post">
+                <input type="submit" value="削除" />
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
