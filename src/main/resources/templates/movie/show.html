@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout/default}">
+<head>
+    <title>映画詳細</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link media="all" th:href="@{/css/video.css}" rel="stylesheet"/>
+</head>
+<body>
+<div layout:fragment="mainContent">
+    <h2>映画詳細</h2>
+
+    <p th:text="${movieDetail['id']}"></p>
+    <p th:text="${movieDetail['title']}"></p>
+    <p th:text="${movieDetail['releaseYear']}"></p>
+    <p th:text="${movieDetail['watchedFlg']==true}? '閲覧済' : '閲覧未済'"></p>
+
+    <a class="homeLink" href="/">ホーム</a>
+</div>
+</body>
+</html>

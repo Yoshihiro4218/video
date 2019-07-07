@@ -21,8 +21,14 @@ public class MovieService {
     }
 
     public List<MovieDto> indexMovieList() {
-        List<MovieDto> list = jdbcTemplate.query("SELECT * FROM movie ORDER BY id", MAPPER);
+        List<MovieDto> list = jdbcTemplate.query("SELECT id, title, release_year, watched_flg FROM movie ORDER BY id", MAPPER);
         log.info("MovieList:{}", list);
         return list;
+    }
+
+    public MovieDto showMovieDetail(int movieId) {
+        MovieDto movie = jdbcTemplate.queryForObject("SELECT * FROM movie WHERE id = ?", MAPPER, movieId);
+        log.info("Movie:{}", movie);
+        return movie;
     }
 }

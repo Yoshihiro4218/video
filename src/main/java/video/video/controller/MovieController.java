@@ -3,6 +3,7 @@ package video.video.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import video.video.dto.MovieDto;
 import video.video.service.MovieService;
@@ -24,5 +25,12 @@ public class MovieController {
         List<MovieDto> list = movieService.indexMovieList();
         model.addAttribute("movieList", list);
         return "movie/index";
+    }
+
+    @GetMapping("/{id}")
+    public String getMovieDetail(@PathVariable("id") int movieId, Model model) {
+        MovieDto movie = movieService.showMovieDetail(movieId);
+        model.addAttribute("movieDetail", movie);
+        return "movie/show";
     }
 }
