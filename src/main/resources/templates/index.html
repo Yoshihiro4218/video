@@ -1,18 +1,19 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout/default}">
 <head>
     <title>映画・ドラマ・俳優のデータベース</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<!--    <style>-->
-<!--        .newArticle{-->
-<!--            margin-bottom: 5px;-->
-<!--        }-->
-<!--    </style>-->
+    <link media="all" th:href="@{/css/video.css}" rel="stylesheet"/>
 </head>
 <body>
-<h1>映画・ドラマ・俳優のデータベース</h1>
-<p>ゆっくりしていってね（仮）</p>
-<a href="/movie">映画のデータベース</a>
+<div layout:fragment="mainContent">
+    <p>ゆっくりしていってね（仮）</p>
+    <h2>
+        <a href="/movie">映画のデータベース</a>
+    </h2>
+
+</div>
 
 </body>
 </html>
