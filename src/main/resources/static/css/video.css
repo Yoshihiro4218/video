@@ -1,3 +1,7 @@
 .homeLink{
     margin: 30px;
 }
+
+.detailHead{
+    display: inline-block;
+}

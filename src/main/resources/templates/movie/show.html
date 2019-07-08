@@ -4,18 +4,51 @@
 <head>
     <title>映画詳細</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link media="all" th:href="@{/css/video.css}" rel="stylesheet"/>
+    <link th:href="@{/css/video.css}" rel="stylesheet"/>
+    <style>
+        h2 {
+            background-color: #f5f5dc;
+            margin: 0px;
+        }
+        .detailHead {
+            display: inline-block;
+        }
+        .detailBody {
+            style="border-top: black ridge; padding: 15px;
+        }
+    </style>
 </head>
-<body>
+<body>style="border-top: black ridge; padding: 15px;
 <div layout:fragment="mainContent">
     <h2>映画詳細</h2>
 
-    <p th:text="${movieDetail['id']}"></p>
-    <p th:text="${movieDetail['title']}"></p>
-    <p th:text="${movieDetail['releaseYear']}"></p>
-    <p th:text="${movieDetail['watchedFlg']==true}? '閲覧済' : '閲覧未済'"></p>
+    <h3 class="detailHead" th:text="${movieDetail['id']}"></h3>
+    <h3 class="detailHead" th:text="${movieDetail['title']}"></h3>
+    <h5 class="detailHead" th:text="'（' + ${movieDetail['releaseYear']} + '年）'"></h5>
+    <button class="alreadyBtn" th:text="${movieDetail['watchedFlg']==true}? '閲覧済' : '閲覧未済'"></button>
 
-    <a class="homeLink" href="/">ホーム</a>
+    <div class="detailBody">
+        <h5 class="detailContent" th:text="'言語：' + ${movieDetail['originalLanguage']}"></h5>
+        <h5 class="detailContent" th:text="'上映時間：' + ${movieDetail['showTimes']} + '分'"></h5>
+        <h5 class="detailContent" th:text="'出演：' + ${movieDetail['starringNum1']}"></h5>
+        <h5 class="detailContent" th:text="'　　：' + ${movieDetail['starringNum2']}"></h5>
+        <h5 class="detailContent" th:text="'　　：' + ${movieDetail['starringNum3']}"></h5>
+        <h5 class="detailContent" th:text="'　　：' + ${movieDetail['starringNum4']}"></h5>
+    </div>
+
+
+<!--    <button id='goodBtn' th:text="'いいね！：'+${article['good']} + '回'"></button>-->
+<!--    <pre th:text="${article['body']}" style="border-top: black ridge; padding: 15px;"></pre>-->
+<!--    <a class="newArticle" th:href="@{/blogs/edit/{id}(id=${article['id']})}">記事を編集</a>-->
+
+
+    <div>
+        <a class="return" href="/movie">一覧へ戻る</a>
+        <a class="homeLink" href="/">ホーム</a>
+    </div>
+
+
 </div>
+
 </body>
 </html>

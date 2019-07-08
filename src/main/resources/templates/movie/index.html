@@ -5,6 +5,12 @@
     <title>映画管理</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link media="all" th:href="@{/css/video.css}" rel="stylesheet"/>
+    <style>
+        h2 {
+            background-color: #f5f5dc;
+            margin: 0px;
+        }
+    </style>
 </head>
 <body>
 <div layout:fragment="mainContent">
@@ -21,9 +27,9 @@
     </thead>
     <tbody th:remove="all-but-first" th:each="movie: ${movieList}" th:object="${movie}">
     <tr>
-        <td th:text="${movie['id']}"></td>
+        <td th:text="'#' + ${movie['id']}"></td>
         <td th:text="${movie['title']}"></td>
-        <td th:text="${movie['releaseYear']}"></td>
+        <td th:text="${movie['releaseYear']} + '年'"></td>
         <td th:text="${movie['watchedFlg']==true}? '閲覧済' : '閲覧未済'"></td>
 
 <!--        <td>-->

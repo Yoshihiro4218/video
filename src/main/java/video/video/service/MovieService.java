@@ -27,7 +27,14 @@ public class MovieService {
     }
 
     public MovieDto showMovieDetail(int movieId) {
-        MovieDto movie = jdbcTemplate.queryForObject("SELECT * FROM movie WHERE id = ?", MAPPER, movieId);
+//        String sql = "SELECT * FROM movie JOIN actor ON " +
+//                       "movie.starring_num1 = actor.id " +
+//                    "OR movie.starring_num2 = actor.id " +
+//                    "OR movie.starring_num3 = actor.id " +
+//                    "OR movie.starring_num4 = actor.id " +
+//                    "WHERE movie.id = ?";
+        String sql = "SELECT * FROM movie WHERE id = ?";
+        MovieDto movie = jdbcTemplate.queryForObject(sql, MAPPER, movieId);
         log.info("Movie:{}", movie);
         return movie;
     }

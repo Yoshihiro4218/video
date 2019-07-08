@@ -29,4 +29,8 @@ public class MovieDto {
     private int starringNum4;
     @NotNull
     private boolean watchedFlg;
+
+    //TODO 一つのDTOにするのか・・・？
+
+    private int name;
 }
