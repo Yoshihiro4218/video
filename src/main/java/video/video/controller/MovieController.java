@@ -5,10 +5,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import video.video.dto.MovieDto;
+import video.video.dto.VideoDto;
 import video.video.service.MovieService;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/movie")
@@ -22,15 +23,21 @@ public class MovieController {
 
     @GetMapping("")
     public String getIndexList(Model model) {
-        List<MovieDto> list = movieService.indexMovieList();
+        List<VideoDto> list = movieService.indexMovieList();
         model.addAttribute("movieList", list);
         return "movie/index";
     }
 
     @GetMapping("/{id}")
     public String getMovieDetail(@PathVariable("id") int movieId, Model model) {
-        MovieDto movie = movieService.showMovieDetail(movieId);
+        VideoDto movie = movieService.showMovieDetail(movieId);
+        List actor = movieService.showActorDetailWithMovie(movieId);
+        String imageUrl = movieService.createMovieImageUrl(movie.getOriginalTitle());
         model.addAttribute("movieDetail", movie);
+        model.addAttribute("actorName1", actor.get(0));
+        model.addAttribute("actorName2", actor.get(1));
+        model.addAttribute("actorName3", actor.get(2));
+        model.addAttribute("actorName4", actor.get(3));
         return "movie/show";
     }
 }
