@@ -11,7 +11,7 @@ public class VideoDto {
 
     private int id;
     private String title;
-    private String originalTitle;
+    private String searchTitle;
     private int releaseYear;
     private String originalLanguage;
     private int showTimes;

@@ -1,6 +1,7 @@
 package video.video.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -48,19 +49,23 @@ public class MovieService {
                 "WHERE movie.id = ?";
         List actorList = jdbcTemplate.queryForList(actorSql, movieId);
         log.info("ActorWithMovie:{}", actorList);
-        log.info("ImageResponse={}", createMovieImageUrl("titanic"));
         return actorList;
     }
 
-    public String createMovieImageUrl(String movieOriginalTitle) {
-        movieOriginalTitle = movieOriginalTitle + " ";
+    public String createMovieImageUrl(String movieOriginalTitle, int releaseYear) {
         String searchBaseUrl = "https://api.themoviedb.org/3/search/movie?api_key=";
         String apiKey = "55ad46a72208ad85dccabde0716a7652";
         String imageBaseUrl = "https://image.tmdb.org/t/p/w500/";
         String spaceReplacedMovieOriginalTitle = movieOriginalTitle.replace(" ", "%20");
-        String searchUrl = searchBaseUrl + apiKey + "&query=" + spaceReplacedMovieOriginalTitle + "&page=1";
+        String year = String.valueOf(releaseYear);
+        String searchUrl = searchBaseUrl + apiKey + "&query=" + spaceReplacedMovieOriginalTitle + "&page=1&year=" + year;
+        log.info("searchUrl={}", searchUrl);
+        String res = restTemplate.getForObject(searchUrl, String.class);
+        log.info("res={}", res);
+        JSONObject json = new JSONObject(res);
+        String posterPath = json.getJSONArray("results").getJSONObject(0).getString("poster_path");
 
-        return restTemplate.getForObject(searchUrl, String.class);
+        return imageBaseUrl + posterPath;
 
     }
 

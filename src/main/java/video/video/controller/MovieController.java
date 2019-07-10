@@ -32,12 +32,13 @@ public class MovieController {
     public String getMovieDetail(@PathVariable("id") int movieId, Model model) {
         VideoDto movie = movieService.showMovieDetail(movieId);
         List actor = movieService.showActorDetailWithMovie(movieId);
-        String imageUrl = movieService.createMovieImageUrl(movie.getOriginalTitle());
+        String imageUrl = movieService.createMovieImageUrl(movie.getSearchTitle(), movie.getReleaseYear());
         model.addAttribute("movieDetail", movie);
         model.addAttribute("actorName1", actor.get(0));
         model.addAttribute("actorName2", actor.get(1));
         model.addAttribute("actorName3", actor.get(2));
         model.addAttribute("actorName4", actor.get(3));
+        model.addAttribute("imageUrl", imageUrl);
         return "movie/show";
     }
 }
