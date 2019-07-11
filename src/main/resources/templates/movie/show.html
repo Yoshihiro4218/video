@@ -14,7 +14,11 @@
             display: inline-block;
         }
         .detailBody {
-            style="border-top: black ridge; padding: 15px;
+            border-top: black ridge; padding: 15px;
+        }
+        .alreadyBtn {
+            width: 150%;
+            height: 150%;
         }
     </style>
 </head>
@@ -25,7 +29,7 @@
     <h3 class="detailHead" th:text="${movieDetail['id']}"></h3>
     <h3 class="detailHead" th:text="${movieDetail['title']}"></h3>
     <h5 class="detailHead" th:text="'（' + ${movieDetail['releaseYear']} + '年）'"></h5>
-    <button class="alreadyBtn" th:text="${movieDetail['watchedFlg']==true}? '閲覧済' : '閲覧未済'"></button>
+    <button class="watchedBtn" id="watchedBtn" th:text="${movieDetail['watchedFlg']==true}? '閲覧済' : '閲覧未済'"></button>
 
     <div class="detailBody">
         <h5 class="detailContent" th:text="'言語：' + ${movieDetail['originalLanguage']}"></h5>
@@ -35,7 +39,6 @@
         <h5 class="detailContent" th:text="'　　：' + ${actorName3['name']}"></h5>
         <h5 class="detailContent" th:text="'　　：' + ${actorName4['name']}"></h5>
     </div>
-
     <img th:src="${imageUrl}">
 
 
@@ -48,9 +51,35 @@
         <a class="return" href="/movie">一覧へ戻る</a>
         <a class="homeLink" href="/">ホーム</a>
     </div>
-
+    <script th:inline="javascript">
+        function watchedBtnClick() {
+                var el = document.getElementById('watchedBtn');
+                el.setAttribute("disabled", "disabled");
+                var xhr = new XMLHttpRequest();
+                var url = "/movie/[[${movieDetail['id']}]]/watched";
+                xhr.open('POST', url, true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.send();
+                xhr.onload = function () {
+                    var res = xhr.response;
+                    console.log('CLICKED!' + res);
+                    if(res==="true"){
+                        console.log("trueだよ")
+                        console.log(el)
+                        el.innerText = "閲覧済";
+                    }else {
+                        console.log("falseだよ")
+                        el.innerText = "閲覧未済";
+                        console.log(el)
+                    }
+                    
+                    el.removeAttribute("disabled");
+                }
+        }
+        var el = document.getElementById('watchedBtn');
+        el.addEventListener('click', watchedBtnClick);
+    </script>
 
 </div>
-
 </body>
 </html>

@@ -2,9 +2,7 @@ package video.video.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import video.video.dto.VideoDto;
 import video.video.service.MovieService;
 
@@ -40,5 +38,12 @@ public class MovieController {
         model.addAttribute("actorName4", actor.get(3));
         model.addAttribute("imageUrl", imageUrl);
         return "movie/show";
+    }
+
+    @PostMapping("/{id}/watched")
+    @ResponseBody
+    public String watchedBtnClicked(@PathVariable("id") int movieId) {
+        String updatedWatchedFlg = movieService.updateWatchedFlg(movieId);
+        return updatedWatchedFlg;
     }
 }

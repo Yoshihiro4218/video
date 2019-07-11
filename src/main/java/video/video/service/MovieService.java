@@ -73,4 +73,18 @@ public class MovieService {
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
         return builder.build();
     }
+
+    public String updateWatchedFlg(int movieId) {
+        VideoDto movie = jdbcTemplate.queryForObject("SELECT * FROM movie WHERE id = ?", MAPPER, movieId);
+        Boolean nowWatchedFlg = movie.isWatchedFlg();
+        Boolean updatedWatchedFlg;
+        if(nowWatchedFlg==true) {
+            updatedWatchedFlg = false;
+        } else {
+            updatedWatchedFlg = true;
+        }
+        jdbcTemplate.update("UPDATE movie SET watched_flg = ? WHERE id = ?", updatedWatchedFlg, movieId);
+        log.info("UpdatedFlg:{}", nowWatchedFlg);
+        return String.valueOf(updatedWatchedFlg);
+    }
 }
