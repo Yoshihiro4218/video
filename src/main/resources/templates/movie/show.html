@@ -32,7 +32,7 @@
     <button class="watchedBtn" id="watchedBtn" th:text="${movieDetail['watchedFlg']==true}? '閲覧済' : '閲覧未済'"></button>
 
     <div class="detailBody">
-        <h5 class="detailContent" th:text="'言語：' + ${movieDetail['originalLanguage']}"></h5>
+        <h5 class="detailContent" th:text="'言語：' + ${movieDetail['searchLanguage']}"></h5>
         <h5 class="detailContent" th:text="'上映時間：' + ${movieDetail['showTimes']} + '分'"></h5>
         <h5 class="detailContent" th:text="'出演：' + ${actorName1['name']}"></h5>
         <h5 class="detailContent" th:text="'　　：' + ${actorName2['name']}"></h5>

@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.client.RestTemplate;
 import video.video.dto.VideoDto;
 
@@ -16,6 +17,7 @@ import java.util.List;
 
 @Service
 @Slf4j
+@CrossOrigin
 public class MovieService {
 
     private final JdbcTemplate jdbcTemplate;
