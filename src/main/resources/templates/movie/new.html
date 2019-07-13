@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout/default}">
+<head>
+    <title>映画登録</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/video.css}" rel="stylesheet"/>
+    <style>
+        h2 {
+            background-color: #f5f5dc;
+            margin: 0px;
+        }
+        h5 {
+            margin: 5px;
+        }
+        .submitBtn {
+            width: 50px;
+            height: 15px;
+        }
+    </style>
+</head>
+<body>style="border-top: black ridge; padding: 15px;
+<div layout:fragment="mainContent">
+    <h2>映画登録</h2>
+    <form action="/movie/new" method="post">
+        <h5>タイトル</h5>
+        <input type="text" name="title" width="80">
+        <h5>検索用タイトル</h5>
+        <input type="text" name="searchTitle" width="80">
+        <h5>リリース年</h5>
+        <input type="text" name="releaseYear" width="80">
+        <h5>上映時間</h5>
+        <input type="text" name="showTimes" width="80">
+        <h5>言語</h5>
+        <input type="text" name="originalLanguage" width="80">
+        <h5>出演1</h5>
+        <input type="text" name="originalLanguage" width="80">
+        <h5>出演2</h5>
+        <input type="text" name="originalLanguage" width="80">
+        <h5>出演3</h5>
+        <input type="text" name="originalLanguage" width="80">
+        <h5>出演4</h5>
+        <input type="text" name="originalLanguage" width="80">
+        <h5>閲覧済/未済</h5>
+        <input type="text" name="originalLanguage" width="80">
+
+
+        <div>
+            <input type="submit" value="登録" class="submitBtn">
+        </div>
+    </form>
+
+
+    <div>
+        <a class="return" href="/movie">キャンセル</a>
+        <a class="homeLink" href="/">ホーム</a>
+    </div>
+
+</div>
+</body>
+</html>

@@ -7,7 +7,6 @@ import video.video.dto.VideoDto;
 import video.video.service.MovieService;
 
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/movie")
@@ -45,5 +44,10 @@ public class MovieController {
     public String watchedBtnClicked(@PathVariable("id") int movieId) {
         String updatedWatchedFlg = movieService.updateWatchedFlg(movieId);
         return updatedWatchedFlg;
+    }
+
+    @GetMapping("/new")
+    public String moveNewMovieForm() {
+        return "movie/new";
     }
 }
