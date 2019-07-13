@@ -52,7 +52,7 @@ public class MovieController {
 
     @GetMapping("/new")
     public String moveNewMovieForm(Model model) {
-        List<CodeDto> languageList = codeService.selectSpecificCodeList("language");
+        List<CodeDto> languageList = codeService.selectSpecificCodeList(1);
         model.addAttribute("languageList", languageList);
         return "movie/new";
     }

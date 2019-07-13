@@ -8,8 +8,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CodeDto {
+    // TODO マスタ毎にテーブル分けたほうがよいので、変更します。
     private int id;
-    private String codeType;
+    private int codeType;
+    private String codeName;
     private int codeNum;
     private String value;
 }
