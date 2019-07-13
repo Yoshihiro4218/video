@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout/default}">
+<head>
+    <title>マスタ設定</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link media="all" th:href="@{/static/css/video.css}" rel="stylesheet"/>
+    <style>
+        h2 {
+            background-color: #f5f5dc;
+            margin: 0px;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="mainContent">
+    <h2>マスタ設定</h2>
+    <h3><a href="/settings/codes">コードマスタ設定</a></h3>
+    <a class="homeLink" href="/">ホーム</a>
+</div>
+</body>
+</html>

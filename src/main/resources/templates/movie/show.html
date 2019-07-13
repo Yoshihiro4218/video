@@ -48,7 +48,7 @@
 
 
     <div>
-        <a class="return" href="/movie">一覧へ戻る</a>
+        <a class="return" href="/movies">一覧へ戻る</a>
         <a class="homeLink" href="/">ホーム</a>
     </div>
     <script th:inline="javascript">
@@ -56,7 +56,7 @@
                 var el = document.getElementById('watchedBtn');
                 el.setAttribute("disabled", "disabled");
                 var xhr = new XMLHttpRequest();
-                var url = "/movie/[[${movieDetail['id']}]]/watched";
+                var url = "/movies/[[${movieDetail['id']}]]/watched";
                 xhr.open('POST', url, true);
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                 xhr.send();

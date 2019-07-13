@@ -1,6 +1,5 @@
 package video.video.controller;
 
-import com.sun.tools.javac.jvm.Code;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,11 +8,10 @@ import video.video.dto.VideoDto;
 import video.video.service.CodeService;
 import video.video.service.MovieService;
 
-import javax.jws.WebParam;
 import java.util.List;
 
 @Controller
-@RequestMapping("/movie")
+@RequestMapping("/movies")
 public class MovieController {
 
     private final MovieService movieService;
