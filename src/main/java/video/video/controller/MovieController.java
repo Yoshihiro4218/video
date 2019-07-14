@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import video.video.dto.LanguageCodeDto;
-import video.video.dto.VideoDto;
+import video.video.dto.MovieDto;
 import video.video.service.CitizenshipCodeService;
 import video.video.service.LanguageCodeService;
 import video.video.service.MovieService;
@@ -27,14 +27,14 @@ public class MovieController {
 
     @GetMapping("")
     public String getIndexList(Model model) {
-        List<VideoDto> list = movieService.indexMovieList();
+        List<MovieDto> list = movieService.indexMovieList();
         model.addAttribute("movieList", list);
         return "movie/index";
     }
 
     @GetMapping("/{id}")
     public String getMovieDetail(@PathVariable("id") int movieId, Model model) {
-        VideoDto movie = movieService.showMovieDetail(movieId);
+        MovieDto movie = movieService.showMovieDetail(movieId);
         List actor = movieService.showActorDetailWithMovie(movieId);
         String imageUrl = movieService.createMovieImageUrl(movie.getSearchTitle(), movie.getReleaseYear());
         model.addAttribute("movieDetail", movie);
@@ -58,5 +58,23 @@ public class MovieController {
         List<LanguageCodeDto> languageList = languageCodeService.selectLanguageCodeList();
         model.addAttribute("languageList", languageList);
         return "movie/new";
+    }
+
+    @PostMapping("/new")
+    public String postNewMovie(
+            @RequestParam("title") String title,
+            @RequestParam("searchTitle") String searchTitle,
+            @RequestParam("releaseYear") int releaseYear,
+            @RequestParam("showTimes") int showTimes,
+            @RequestParam("originalLanguage") String originalLanguage,
+            @RequestParam("starringNum1") int starringNum1,
+            @RequestParam("starringNum2") int starringNum2,
+            @RequestParam("starringNum3") int starringNum3,
+            @RequestParam("starringNum4") int starringNum4,
+            @RequestParam("watchedFlg") int watchedFlg
+            ) {
+        int movieId = movieService.createNewMovie(title,searchTitle, releaseYear, showTimes, originalLanguage, starringNum1,
+                                                  starringNum2, starringNum3, starringNum4, watchedFlg);
+        return "redirect:/movies/" + movieId;
     }
 }

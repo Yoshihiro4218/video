@@ -32,26 +32,29 @@
         <h5>上映時間</h5>
         <input type="text" name="showTimes" width="80">
         <h5>言語</h5>
-        <select>
-            <option value="">---</option>
+        <select name="originalLanguage">
             <option th:each="language : ${languageList}" th:value="${language.value}" th:text="${language.value}" th:selected="${language.value} == *{languageList}">singleSelect</option>
         </select>
         <h5>出演1</h5>
-        <input type="text" name="originalLanguage" width="80">
+        <input type="text" name="starringNum1" width="80">
         <h5>出演2</h5>
-        <input type="text" name="originalLanguage" width="80">
+        <input type="text" name="starringNum2" width="80">
         <h5>出演3</h5>
-        <input type="text" name="originalLanguage" width="80">
+        <input type="text" name="starringNum3" width="80">
         <h5>出演4</h5>
-        <input type="text" name="originalLanguage" width="80">
+        <input type="text" name="starringNum4" width="80">
         <h5>閲覧済/未済</h5>
-        <input type="text" name="originalLanguage" width="80">
-
-
+        <select name="watchedFlg">
+            <option th:value="0" th:text="閲覧未済"></option>
+            <option th:value="1" th:text="閲覧済" th:selected="閲覧済"></option>
+        </select>
         <div>
             <input type="submit" value="登録" class="submitBtn">
         </div>
     </form>
+
+    <p>（注）出演者がリストにない場合は、先に俳優の登録を行ってください。<a href="/actors/new" th:target="_blank">俳優登録(工事中)</a></p>
+
 
 
     <div>

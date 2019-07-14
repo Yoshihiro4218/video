@@ -11,7 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.client.RestTemplate;
-import video.video.dto.VideoDto;
+import video.video.dto.MovieDto;
 
 import java.util.List;
 
@@ -23,21 +23,21 @@ public class MovieService {
     private final JdbcTemplate jdbcTemplate;
     @Autowired
     public RestTemplate restTemplate;
-    private static final RowMapper<VideoDto> MAPPER = new BeanPropertyRowMapper<>(VideoDto.class);
+    private static final RowMapper<MovieDto> MAPPER = new BeanPropertyRowMapper<>(MovieDto.class);
 
     public MovieService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<VideoDto> indexMovieList() {
-        List<VideoDto> list = jdbcTemplate.query("SELECT id, title, release_year, watched_flg FROM movie ORDER BY id;", MAPPER);
+    public List<MovieDto> indexMovieList() {
+        List<MovieDto> list = jdbcTemplate.query("SELECT id, title, release_year, watched_flg FROM movie ORDER BY id;", MAPPER);
         log.info("MovieList:{}", list);
         return list;
     }
 
-    public VideoDto showMovieDetail(int movieId) {
+    public MovieDto showMovieDetail(int movieId) {
         String movieSql = "SELECT * FROM movie WHERE id = ?;";
-        VideoDto movie = jdbcTemplate.queryForObject(movieSql, MAPPER, movieId);
+        MovieDto movie = jdbcTemplate.queryForObject(movieSql, MAPPER, movieId);
         log.info("Movie:{}", movie);
         return movie;
     }
@@ -61,14 +61,16 @@ public class MovieService {
         String spaceReplacedMovieOriginalTitle = movieOriginalTitle.replace(" ", "%20");
         String year = String.valueOf(releaseYear);
         String searchUrl = searchBaseUrl + apiKey + "&query=" + spaceReplacedMovieOriginalTitle + "&page=1&year=" + year;
-        log.info("searchUrl={}", searchUrl);
         String res = restTemplate.getForObject(searchUrl, String.class);
-        log.info("res={}", res);
         JSONObject json = new JSONObject(res);
-        String posterPath = json.getJSONArray("results").getJSONObject(0).getString("poster_path");
-
+        String posterPath;
+        if(json.getInt("total_results")==(0)) {
+            posterPath = "/image/noImage.png";
+            imageBaseUrl = "";
+        } else {
+            posterPath = json.getJSONArray("results").getJSONObject(0).getString("poster_path");
+        }
         return imageBaseUrl + posterPath;
-
     }
 
     @Bean
@@ -77,7 +79,7 @@ public class MovieService {
     }
 
     public String updateWatchedFlg(int movieId) {
-        VideoDto movie = jdbcTemplate.queryForObject("SELECT * FROM movie WHERE id = ?;", MAPPER, movieId);
+        MovieDto movie = jdbcTemplate.queryForObject("SELECT * FROM movie WHERE id = ?;", MAPPER, movieId);
         Boolean nowWatchedFlg = movie.isWatchedFlg();
         Boolean updatedWatchedFlg;
         if(nowWatchedFlg==true) {
@@ -88,5 +90,19 @@ public class MovieService {
         jdbcTemplate.update("UPDATE movie SET watched_flg = ? WHERE id = ?;", updatedWatchedFlg, movieId);
         log.info("UpdatedFlg:{}", nowWatchedFlg);
         return String.valueOf(updatedWatchedFlg);
+    }
+
+    public int createNewMovie(String title, String searchTitle, int releaseYear, int showTimes, String originalLanguage, int starringNum1,
+                              int starringNum2, int starringNum3, int starringNum4, int watchedFlg) {
+        Boolean watchedBooleanFlg = watchedFlg==0? false : true;
+        String updateSql = "INSERT INTO movie(title, search_title, release_year, show_times, original_language, " +
+                     "starring_num1, starring_num2, starring_num3, starring_num4, watched_flg) " +
+                     "VALUE(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        jdbcTemplate.update(updateSql, title, searchTitle, releaseYear, showTimes, originalLanguage, starringNum1,
+                            starringNum2, starringNum3, starringNum4, watchedBooleanFlg);
+
+        String selectMovieIdSql = "SELECT MAX(id) FROM movie;";
+        int movieId = jdbcTemplate.queryForObject(selectMovieIdSql, int.class);
+        return movieId;
     }
 }
