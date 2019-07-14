@@ -3,9 +3,10 @@ package video.video.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import video.video.dto.CodeDto;
+import video.video.dto.LanguageCodeDto;
 import video.video.dto.VideoDto;
-import video.video.service.CodeService;
+import video.video.service.CitizenshipCodeService;
+import video.video.service.LanguageCodeService;
 import video.video.service.MovieService;
 
 import java.util.List;
@@ -15,11 +16,13 @@ import java.util.List;
 public class MovieController {
 
     private final MovieService movieService;
-    private final CodeService codeService;
+    private final LanguageCodeService languageCodeService;
+    private final CitizenshipCodeService citizenshipCodeService;
 
-    public MovieController(MovieService movieService, CodeService codeService){
+    public MovieController(MovieService movieService, LanguageCodeService languageCodeService, CitizenshipCodeService citizenshipCodeService){
         this.movieService = movieService;
-        this.codeService = codeService;
+        this.languageCodeService = languageCodeService;
+        this.citizenshipCodeService = citizenshipCodeService;
     }
 
     @GetMapping("")
@@ -52,7 +55,7 @@ public class MovieController {
 
     @GetMapping("/new")
     public String moveNewMovieForm(Model model) {
-        List<CodeDto> languageList = codeService.selectSpecificCodeList(1);
+        List<LanguageCodeDto> languageList = languageCodeService.selectLanguageCodeList();
         model.addAttribute("languageList", languageList);
         return "movie/new";
     }

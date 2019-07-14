@@ -30,13 +30,13 @@ public class MovieService {
     }
 
     public List<VideoDto> indexMovieList() {
-        List<VideoDto> list = jdbcTemplate.query("SELECT id, title, release_year, watched_flg FROM movie ORDER BY id", MAPPER);
+        List<VideoDto> list = jdbcTemplate.query("SELECT id, title, release_year, watched_flg FROM movie ORDER BY id;", MAPPER);
         log.info("MovieList:{}", list);
         return list;
     }
 
     public VideoDto showMovieDetail(int movieId) {
-        String movieSql = "SELECT * FROM movie WHERE id = ?";
+        String movieSql = "SELECT * FROM movie WHERE id = ?;";
         VideoDto movie = jdbcTemplate.queryForObject(movieSql, MAPPER, movieId);
         log.info("Movie:{}", movie);
         return movie;
@@ -48,7 +48,7 @@ public class MovieService {
                 "OR movie.starring_num2 = actor.id " +
                 "OR movie.starring_num3 = actor.id " +
                 "OR movie.starring_num4 = actor.id " +
-                "WHERE movie.id = ?";
+                "WHERE movie.id = ?;";
         List actorList = jdbcTemplate.queryForList(actorSql, movieId);
         log.info("ActorWithMovie:{}", actorList);
         return actorList;
@@ -77,7 +77,7 @@ public class MovieService {
     }
 
     public String updateWatchedFlg(int movieId) {
-        VideoDto movie = jdbcTemplate.queryForObject("SELECT * FROM movie WHERE id = ?", MAPPER, movieId);
+        VideoDto movie = jdbcTemplate.queryForObject("SELECT * FROM movie WHERE id = ?;", MAPPER, movieId);
         Boolean nowWatchedFlg = movie.isWatchedFlg();
         Boolean updatedWatchedFlg;
         if(nowWatchedFlg==true) {
@@ -85,7 +85,7 @@ public class MovieService {
         } else {
             updatedWatchedFlg = true;
         }
-        jdbcTemplate.update("UPDATE movie SET watched_flg = ? WHERE id = ?", updatedWatchedFlg, movieId);
+        jdbcTemplate.update("UPDATE movie SET watched_flg = ? WHERE id = ?;", updatedWatchedFlg, movieId);
         log.info("UpdatedFlg:{}", nowWatchedFlg);
         return String.valueOf(updatedWatchedFlg);
     }
