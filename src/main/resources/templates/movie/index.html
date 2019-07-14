@@ -33,7 +33,7 @@
             <td th:text="${movie['releaseYear']} + '年'"></td>
             <td th:text="${movie['watchedFlg']==true}? '閲覧済' : '閲覧未済'"></td>
             <td>
-                <form th:action="@{/movies/{id}(id=${movies['id']})}" th:method="get">
+                <form th:action="@{/movies/{id}(id=${movie['id']})}" th:method="get">
                     <input type="submit" value="映画の詳細" style="width: 100%; height: 100%;" />
                 </form>
             </td>
