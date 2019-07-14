@@ -11,4 +11,9 @@ public class SettingController {
     public String settingIndex () {
         return "setting/index";
     }
+
+    @GetMapping("/codes")
+    public String codeIndex () {
+        return "setting/code/index";
+    }
 }

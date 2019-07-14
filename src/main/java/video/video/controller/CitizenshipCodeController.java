@@ -1,11 +1,16 @@
 package video.video.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import video.video.dto.CitizenshipCodeDto;
 import video.video.service.CitizenshipCodeService;
 
+import java.util.List;
+
 @Controller
-@RequestMapping("/settings/codes")
+@RequestMapping("/settings/codes/citizenships")
 public class CitizenshipCodeController {
     private final CitizenshipCodeService citizenshipCodeService;
 
@@ -13,9 +18,10 @@ public class CitizenshipCodeController {
         this.citizenshipCodeService = citizenshipCodeService;
     }
 
-//    @GetMapping("")
-//    public String codeIndex (Model model) {
-//        List<CodeDto> codeList = codeService
-//        return "setting/code/index";
-//    }
+    @GetMapping("")
+    public String citizenshipList (Model model) {
+        List<CitizenshipCodeDto> citizenshipList = citizenshipCodeService.selectCitizenshipCodeList();
+        model.addAttribute("citizenships", citizenshipList);
+        return "setting/code/citizenship/index";
+    }
 }

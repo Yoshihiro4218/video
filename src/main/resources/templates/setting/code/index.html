@@ -20,32 +20,9 @@
 <div layout:fragment="mainContent">
     <h2>マスタ設定</h2>
     <h3>コードマスタ設定</h3>
-    <a href="/settings/new">新規登録</a>
-    <table class="table table-striped" border="1">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>タイトル</th>
-            <th>リリース年</th>
-            <th>閲覧状況</th>
-            <th>削除</th>
-        </tr>
-        </thead>
-        <tbody th:remove="all-but-first" th:each="movie: ${movieList}" th:object="${movie}">
-        <tr>
-            <td th:text="'#' + ${movie['id']}"></td>
-            <td th:text="${movie['title']}"></td>
-            <td th:text="${movie['releaseYear']} + '年'"></td>
-            <td th:text="${movie['watchedFlg']==true}? '閲覧済' : '閲覧未済'"></td>
-            <td>
-                <form th:action="@{/movie/delete/{id}(id=${movie['id']})}" th:method="post">
-                    <input type="submit" value="削除" />
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <a class="return" href="/movies">戻る</a>
+    <h4><a href="/settings/codes/languages">言語マスタ設定</a></h4>
+    <h4><a href="/settings/codes/citizenships">国籍マスタ設定</a></h4>
+    <a class="return" href="/settings">戻る</a>
     <a class="homeLink" href="/">ホーム</a>
 </div>
 </body>

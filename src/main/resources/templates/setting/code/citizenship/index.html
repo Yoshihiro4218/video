@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout/default}">
+<head>
+    <title>国籍マスタ設定</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link media="all" th:href="@{/static/css/video.css}" rel="stylesheet"/>
+    <style>
+        h2 {
+            background-color: #f5f5dc;
+            margin: 0px;
+        }
+        h3 {
+            background-color: #d4f5d4;
+            margin: 0px;
+        }
+        h4 {
+            background-color: #f5d4e7;
+            margin: 0px;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="mainContent">
+    <h2>マスタ設定</h2>
+    <h3>コードマスタ設定</h3>
+    <h4>国籍マスタ設定</h4>
+    <a href="/settings/codes/citizenships//new">新規登録</a>
+    <table class="table table-striped" border="1">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>国籍</th>
+            <th>削除</th>
+        </tr>
+        </thead>
+        <tbody th:remove="all-but-first" th:each="citizenship: ${citizenships}" th:object="${citizenship}">
+        <tr>
+            <td th:text="'#' + ${citizenship['id']}"></td>
+            <td th:text="${citizenship['value']}"></td>
+            <td>
+                <form th:action="@{/settings/codes/citizenships/{id}(id=${citizenship['id']})}" th:method="post">
+                    <input type="submit" value="削除" />
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="return" href="/settings/codes">戻る</a>
+    <a class="homeLink" href="/">ホーム</a>
+</div>
+</body>
+</html>
