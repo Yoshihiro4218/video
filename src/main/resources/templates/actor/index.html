@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout/default}">
+<head>
+    <title>俳優管理</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link media="all" th:href="@{/css/video.css}" rel="stylesheet"/>
+    <style>
+        h2 {
+            background-color: #f5f5dc;
+            margin: 0px;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="mainContent">
+    <h2>俳優管理</h2>
+    <a href="/actors/new">新規登録</a>
+    <table class="table table-striped" border="1">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>名前</th>
+            <th>生年月日</th>
+            <th>俳優の詳細</th>
+        </tr>
+        </thead>
+        <tbody th:remove="all-but-first" th:each="actor: ${actorList}" th:object="${actor}">
+        <tr>
+            <td th:text="'#' + ${actor['id']}"></td>
+            <td th:text="${actor['name']}"></td>
+            <td th:text="${actor['birthday']} + '年'"></td>
+            <td>
+                <form th:action="@{/actors/{id}(id=${actor['id']})}" th:method="get">
+                    <input type="submit" value="俳優の詳細" style="width: 100%; height: 100%;" />
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="homeLink" href="/">ホーム</a>
+</div>
+</body>
+</html>
