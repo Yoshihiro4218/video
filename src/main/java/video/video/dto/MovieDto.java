@@ -15,9 +15,9 @@ public class MovieDto {
     private int releaseYear;
     private String originalLanguage;
     private int showTimes;
-    private int starringNum1;
-    private int starringNum2;
-    private int starringNum3;
-    private int starringNum4;
+    private Integer starringNum1;
+    private Integer starringNum2;
+    private Integer starringNum3;
+    private Integer starringNum4;
     private boolean watchedFlg;
 }

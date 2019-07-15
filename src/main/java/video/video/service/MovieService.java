@@ -42,14 +42,47 @@ public class MovieService {
         return movie;
     }
 
-    public List showActorDetailWithMovie(int movieId) {
-        String actorSql = "SELECT actor.name FROM movie JOIN actor ON " +
-                "movie.starring_num1 = actor.id " +
-                "OR movie.starring_num2 = actor.id " +
-                "OR movie.starring_num3 = actor.id " +
-                "OR movie.starring_num4 = actor.id " +
-                "WHERE movie.id = ?;";
-        List actorList = jdbcTemplate.queryForList(actorSql, movieId);
+    public List showActorDetailWithMovie(MovieDto movie) {
+        String actorSql;
+        List actorList = null;
+        if(movie.getStarringNum4()!=null){
+            actorSql = "SELECT actor.name FROM movie JOIN actor ON " +
+                    "movie.starring_num1 = actor.id " +
+                    "OR movie.starring_num2 = actor.id " +
+                    "OR movie.starring_num3 = actor.id " +
+                    "OR movie.starring_num4 = actor.id " +
+                    "WHERE movie.id = ?;";
+            actorList = jdbcTemplate.queryForList(actorSql, movie.getId());
+        } else if(movie.getStarringNum3()!=null) {
+            actorSql = "SELECT actor.name FROM movie JOIN actor ON " +
+                    "movie.starring_num1 = actor.id " +
+                    "OR movie.starring_num2 = actor.id " +
+                    "OR movie.starring_num3 = actor.id " +
+                    "WHERE movie.id = ?;";
+            actorList = jdbcTemplate.queryForList(actorSql, movie.getId());
+            actorList.add(3, null);
+        } else if (movie.getStarringNum2()!=null) {
+            actorSql = "SELECT actor.name FROM movie JOIN actor ON " +
+                    "movie.starring_num1 = actor.id " +
+                    "OR movie.starring_num2 = actor.id " +
+                    "WHERE movie.id = ?;";
+            actorList = jdbcTemplate.queryForList(actorSql, movie.getId());
+            actorList.add(2, null);
+            actorList.add(3, null);
+        } else if (movie.getStarringNum1()!=null) {
+            actorSql = "SELECT actor.name FROM movie JOIN actor ON " +
+                    "movie.starring_num1 = actor.id " +
+                    "WHERE movie.id = ?;";
+            actorList = jdbcTemplate.queryForList(actorSql, movie.getId());
+            actorList.add(1, null);
+            actorList.add(2, null);
+            actorList.add(3, null);
+        } else {
+            actorList.add(0, null);
+            actorList.add(1, null);
+            actorList.add(2, null);
+            actorList.add(3, null);
+        }
         log.info("ActorWithMovie:{}", actorList);
         return actorList;
     }

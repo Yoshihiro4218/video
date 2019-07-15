@@ -35,7 +35,7 @@ public class MovieController {
     @GetMapping("/{id}")
     public String getMovieDetail(@PathVariable("id") int movieId, Model model) {
         MovieDto movie = movieService.showMovieDetail(movieId);
-        List actor = movieService.showActorDetailWithMovie(movieId);
+        List actor = movieService.showActorDetailWithMovie(movie);
         String imageUrl = movieService.createMovieImageUrl(movie.getSearchTitle(), movie.getReleaseYear());
         model.addAttribute("movieDetail", movie);
         model.addAttribute("actorName1", actor.get(0));
