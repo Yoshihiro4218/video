@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import video.video.dto.ActorDto;
+import video.video.dto.MovieDto;
 
 import java.util.List;
 
@@ -26,5 +27,12 @@ public class ActorService {
         List<ActorDto> list = jdbcTemplate.query("SELECT id, name, birthday FROM actor ORDER BY id;", MAPPER);
         log.info("ActorList:{}", list);
         return list;
+    }
+
+    public ActorDto showActorDetail(int actorId) {
+        String actorSql = "SELECT * FROM actor WHERE id = ?;";
+        ActorDto actor = jdbcTemplate.queryForObject(actorSql, MAPPER, actorId);
+        log.info("Actor:{}", actor);
+        return actor;
     }
 }
