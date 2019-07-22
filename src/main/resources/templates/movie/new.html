@@ -45,8 +45,8 @@
         <input type="text" name="starringNum4" width="80">
         <h5>閲覧済/未済</h5>
         <select name="watchedFlg">
-            <option th:value="0" th:text="閲覧未済"></option>
-            <option th:value="1" th:text="閲覧済" th:selected="閲覧済"></option>
+            <option th:value="false" th:text="閲覧未済"></option>
+            <option th:value="true" th:text="閲覧済" th:selected="閲覧済"></option>
         </select>
         <div>
             <input type="submit" value="登録" class="submitBtn">

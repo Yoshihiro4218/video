@@ -71,7 +71,7 @@ public class MovieController {
             @RequestParam("starringNum2") int starringNum2,
             @RequestParam("starringNum3") int starringNum3,
             @RequestParam("starringNum4") int starringNum4,
-            @RequestParam("watchedFlg") int watchedFlg
+            @RequestParam("watchedFlg") Boolean watchedFlg
             ) {
         int movieId = movieService.createNewMovie(title,searchTitle, releaseYear, showTimes, originalLanguage, starringNum1,
                                                   starringNum2, starringNum3, starringNum4, watchedFlg);

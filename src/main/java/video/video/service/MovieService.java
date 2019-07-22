@@ -126,13 +126,12 @@ public class MovieService {
     }
 
     public int createNewMovie(String title, String searchTitle, int releaseYear, int showTimes, String originalLanguage, int starringNum1,
-                              int starringNum2, int starringNum3, int starringNum4, int watchedFlg) {
-        Boolean watchedBooleanFlg = watchedFlg==0? false : true;
+                              int starringNum2, int starringNum3, int starringNum4, Boolean watchedFlg) {
         String updateSql = "INSERT INTO movie(title, search_title, release_year, show_times, original_language, " +
                      "starring_num1, starring_num2, starring_num3, starring_num4, watched_flg) " +
                      "VALUE(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
         jdbcTemplate.update(updateSql, title, searchTitle, releaseYear, showTimes, originalLanguage, starringNum1,
-                            starringNum2, starringNum3, starringNum4, watchedBooleanFlg);
+                            starringNum2, starringNum3, starringNum4, watchedFlg);
 
         String selectMovieIdSql = "SELECT MAX(id) FROM movie;";
         int movieId = jdbcTemplate.queryForObject(selectMovieIdSql, int.class);
