@@ -4,7 +4,7 @@
 <head>
     <title>映画登録</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link th:href="@{/css/video.css}" rel="stylesheet"/>
+    <link href="/css/video.css" th:href="@{/css/video.css}" rel="stylesheet"/>
     <style>
         h2 {
             background-color: #f5f5dc;
@@ -30,11 +30,11 @@
 <body>style="border-top: black ridge; padding: 15px;
 <div layout:fragment="mainContent">
     <h2>映画登録</h2>
-    <form action="#" th:action="@{/movies/new}" th:method="post" th:object="${movieDto}">
-        <h5>タイトル</h5>
+    <form action="#" th:action="@{/movies/new}" th:method="post">
+        <h5 th:class="testClass">タイトル</h5>
         <div style="display:inline-flex">
-            <input type="text" name="title" width="80" th:classappend="${#fields.hasErrors('title')} ? 'formError':''">
-            <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error"></div>
+            <input type="text" name="title" width="80" th:classappend="${#fields.hasErrors('movieDto.title')} ? 'formError':''">
+            <div th:if="${#fields.hasErrors('movieDto.title')}" th:errors="*{movieDto.title}" class="error"></div>
         </div>
         <h5>検索用タイトル</h5>
         <input type="text" name="searchTitle" width="80">
@@ -44,7 +44,7 @@
         <input type="text" name="showTimes" width="80">
         <h5>言語</h5>
         <select name="originalLanguage">
-<!--            <option th:each="language : ${languageList}" th:value="${language.value}" th:text="${language.value}" th:selected="${language.value} == *{languageList}">singleSelect</option>-->
+            <option th:each="language : ${languageList}" th:value="${language.value}" th:text="${language.value}" th:selected="${language.value} == *{languageList}">singleSelect</option>
         </select>
         <h5>出演1</h5>
         <input type="text" name="starringNum1" width="80">

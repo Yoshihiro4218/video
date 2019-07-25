@@ -68,7 +68,8 @@ public class MovieController {
     @PostMapping("/new")
     public String postNewMovie(@Validated @ModelAttribute MovieDto movieDto, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()) {
-            log.info("Error:{}", bindingResult.getFieldError());
+            List<LanguageCodeDto> languageList = languageCodeService.selectLanguageCodeList();
+            model.addAttribute("languageList", languageList);
             model.addAttribute("movieDto", movieDto);
             return "movie/new";
         }
