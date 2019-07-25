@@ -1,7 +1,10 @@
 package video.video.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import video.video.dto.LanguageCodeDto;
 import video.video.dto.MovieDto;
@@ -13,6 +16,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/movies")
+@Slf4j
 public class MovieController {
 
     private final MovieService movieService;
@@ -57,11 +61,17 @@ public class MovieController {
     public String moveNewMovieForm(Model model) {
         List<LanguageCodeDto> languageList = languageCodeService.selectLanguageCodeList();
         model.addAttribute("languageList", languageList);
+        model.addAttribute("movieDto", new MovieDto());
         return "movie/new";
     }
 
     @PostMapping("/new")
-    public String postNewMovie(@ModelAttribute MovieDto movieDto) {
+    public String postNewMovie(@Validated @ModelAttribute MovieDto movieDto, BindingResult bindingResult, Model model) {
+        if(bindingResult.hasErrors()) {
+            log.info("Error:{}", bindingResult.getFieldError());
+            model.addAttribute("movieDto", movieDto);
+            return "movie/new";
+        }
         int movieId = movieService.createNewMovie(movieDto);
         return "redirect:/movies/" + movieId;
     }

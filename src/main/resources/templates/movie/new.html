@@ -17,14 +17,25 @@
             width: 50px;
             height: 15px;
         }
+        .error {
+            color: red;
+        }
+        .formError {
+            border-style: solid;
+            border-color: red;
+            border-width: thin;
+        }
     </style>
 </head>
 <body>style="border-top: black ridge; padding: 15px;
 <div layout:fragment="mainContent">
     <h2>映画登録</h2>
-    <form action="/movies/new" method="post">
+    <form action="#" th:action="@{/movies/new}" th:method="post" th:object="${movieDto}">
         <h5>タイトル</h5>
-        <input type="text" name="title" width="80">
+        <div style="display:inline-flex">
+            <input type="text" name="title" width="80" th:classappend="${#fields.hasErrors('title')} ? 'formError':''">
+            <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="error"></div>
+        </div>
         <h5>検索用タイトル</h5>
         <input type="text" name="searchTitle" width="80">
         <h5>リリース年</h5>
@@ -33,7 +44,7 @@
         <input type="text" name="showTimes" width="80">
         <h5>言語</h5>
         <select name="originalLanguage">
-            <option th:each="language : ${languageList}" th:value="${language.value}" th:text="${language.value}" th:selected="${language.value} == *{languageList}">singleSelect</option>
+<!--            <option th:each="language : ${languageList}" th:value="${language.value}" th:text="${language.value}" th:selected="${language.value} == *{languageList}">singleSelect</option>-->
         </select>
         <h5>出演1</h5>
         <input type="text" name="starringNum1" width="80">
