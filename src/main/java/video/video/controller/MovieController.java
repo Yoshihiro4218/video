@@ -61,20 +61,8 @@ public class MovieController {
     }
 
     @PostMapping("/new")
-    public String postNewMovie(
-            @RequestParam("title") String title,
-            @RequestParam("searchTitle") String searchTitle,
-            @RequestParam("releaseYear") int releaseYear,
-            @RequestParam("showTimes") int showTimes,
-            @RequestParam("originalLanguage") String originalLanguage,
-            @RequestParam("starringNum1") int starringNum1,
-            @RequestParam("starringNum2") int starringNum2,
-            @RequestParam("starringNum3") int starringNum3,
-            @RequestParam("starringNum4") int starringNum4,
-            @RequestParam("watchedFlg") Boolean watchedFlg
-            ) {
-        int movieId = movieService.createNewMovie(title,searchTitle, releaseYear, showTimes, originalLanguage, starringNum1,
-                                                  starringNum2, starringNum3, starringNum4, watchedFlg);
+    public String postNewMovie(@ModelAttribute MovieDto movieDto) {
+        int movieId = movieService.createNewMovie(movieDto);
         return "redirect:/movies/" + movieId;
     }
 }

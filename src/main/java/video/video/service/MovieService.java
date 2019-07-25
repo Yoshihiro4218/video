@@ -125,13 +125,13 @@ public class MovieService {
         return String.valueOf(updatedWatchedFlg);
     }
 
-    public int createNewMovie(String title, String searchTitle, int releaseYear, int showTimes, String originalLanguage, int starringNum1,
-                              int starringNum2, int starringNum3, int starringNum4, Boolean watchedFlg) {
+    public int createNewMovie(MovieDto movieDto) {
         String updateSql = "INSERT INTO movie(title, search_title, release_year, show_times, original_language, " +
                      "starring_num1, starring_num2, starring_num3, starring_num4, watched_flg) " +
                      "VALUE(?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-        jdbcTemplate.update(updateSql, title, searchTitle, releaseYear, showTimes, originalLanguage, starringNum1,
-                            starringNum2, starringNum3, starringNum4, watchedFlg);
+        jdbcTemplate.update(updateSql, movieDto.getTitle(), movieDto.getSearchTitle(), movieDto.getReleaseYear(), movieDto.getShowTimes(),
+                movieDto.getOriginalLanguage(), movieDto.getStarringNum1(), movieDto.getStarringNum2(), movieDto.getStarringNum3(),
+                movieDto.getStarringNum4(), movieDto.isWatchedFlg());
 
         String selectMovieIdSql = "SELECT MAX(id) FROM movie;";
         int movieId = jdbcTemplate.queryForObject(selectMovieIdSql, int.class);
