@@ -37,11 +37,20 @@
             <div th:if="${#fields.hasErrors('movieDto.title')}" th:errors="*{movieDto.title}" class="error"></div>
         </div>
         <h5>検索用タイトル</h5>
-        <input type="text" name="searchTitle" width="80">
+        <div style="display:inline-flex">
+            <input type="text" name="searchTitle" width="80" th:classappend="${#fields.hasErrors('movieDto.searchTitle')} ? 'formError':''">
+            <div th:if="${#fields.hasErrors('movieDto.searchTitle')}" th:errors="*{movieDto.searchTitle}" class="error"></div>
+        </div>
         <h5>リリース年</h5>
-        <input type="text" name="releaseYear" width="80">
+        <div style="display:inline-flex">
+            <input type="text" name="releaseYear" width="80" th:classappend="${#fields.hasErrors('movieDto.releaseYear')} ? 'formError':''">
+            <div th:if="${#fields.hasErrors('movieDto.releaseYear')}" th:errors="*{movieDto.releaseYear}" class="error"></div>
+        </div>
         <h5>上映時間</h5>
-        <input type="text" name="showTimes" width="80">
+        <div style="display:inline-flex">
+            <input type="text" name="showTimes" width="80" th:classappend="${#fields.hasErrors('movieDto.showTimes')} ? 'formError':''">
+            <div th:if="${#fields.hasErrors('movieDto.showTimes')}" th:errors="*{movieDto.showTimes}" class="error"></div>
+        </div>
         <h5>言語</h5>
         <select name="originalLanguage">
             <option th:each="language : ${languageList}" th:value="${language.value}" th:text="${language.value}" th:selected="${language.value} == *{languageList}">singleSelect</option>
