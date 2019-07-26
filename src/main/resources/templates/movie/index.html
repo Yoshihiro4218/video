@@ -5,42 +5,40 @@
     <title>映画管理</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link media="all" th:href="@{/css/video.css}" rel="stylesheet"/>
-    <style>
-        h2 {
-            background-color: #f5f5dc;
-            margin: 0px;
-        }
-    </style>
 </head>
 <body>
 <div layout:fragment="mainContent">
     <h2>映画管理</h2>
-    <a href="/movies/new">新規登録</a>
-    <table class="table table-striped" border="1">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>タイトル</th>
-            <th>リリース年</th>
-            <th>閲覧状況</th>
-            <th>映画の詳細</th>
-        </tr>
-        </thead>
-        <tbody th:remove="all-but-first" th:each="movie: ${movieList}" th:object="${movie}">
-        <tr>
-            <td th:text="'#' + ${movie['id']}"></td>
-            <td th:text="${movie['title']}"></td>
-            <td th:text="${movie['releaseYear']} + '年'"></td>
-            <td th:text="${movie['watchedFlg']==true}? '閲覧済' : '閲覧未済'"></td>
-            <td>
-                <form th:action="@{/movies/{id}(id=${movie['id']})}" th:method="get">
-                    <input type="submit" value="映画の詳細" style="width: 100%; height: 100%;" />
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <a class="homeLink" href="/">ホーム</a>
+    <div class="contents">
+        <a href="/movies/new">新規登録</a>
+        <table class="table table-striped" border="1">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>タイトル</th>
+                <th>リリース年</th>
+                <th>閲覧状況</th>
+                <th>映画の詳細</th>
+            </tr>
+            </thead>
+            <tbody th:remove="all-but-first" th:each="movie: ${movieList}" th:object="${movie}">
+            <tr>
+                <td th:text="'#' + ${movie['id']}"></td>
+                <td th:text="${movie['title']}"></td>
+                <td th:text="${movie['releaseYear']} + '年'"></td>
+                <td th:text="${movie['watchedFlg']==true}? '閲覧済' : '閲覧未済'"></td>
+                <td>
+                    <form th:action="@{/movies/{id}(id=${movie['id']})}" th:method="get">
+                        <input type="submit" value="映画の詳細" style="width: 100%; height: 100%;" />
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <a class="homeLink" href="/">ホーム</a>
+    </div>
 </div>
 </body>
 </html>

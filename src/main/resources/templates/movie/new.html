@@ -5,82 +5,62 @@
     <title>映画登録</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="/css/video.css" th:href="@{/css/video.css}" rel="stylesheet"/>
-    <style>
-        h2 {
-            background-color: #f5f5dc;
-            margin: 0px;
-        }
-        h5 {
-            margin: 5px;
-        }
-        .submitBtn {
-            width: 50px;
-            height: 15px;
-        }
-        .error {
-            color: red;
-        }
-        .formError {
-            border-style: solid;
-            border-color: red;
-            border-width: thin;
-        }
-    </style>
 </head>
 <body>style="border-top: black ridge; padding: 15px;
 <div layout:fragment="mainContent">
     <h2>映画登録</h2>
-    <form action="#" th:action="@{/movies/new}" th:method="post">
-        <h5 th:class="testClass">タイトル</h5>
-        <div style="display:inline-flex">
-            <input type="text" name="title" width="80" th:classappend="${#fields.hasErrors('movieDto.title')} ? 'formError':''">
-            <div th:if="${#fields.hasErrors('movieDto.title')}" th:errors="*{movieDto.title}" class="error"></div>
-        </div>
-        <h5>検索用タイトル</h5>
-        <div style="display:inline-flex">
-            <input type="text" name="searchTitle" width="80" th:classappend="${#fields.hasErrors('movieDto.searchTitle')} ? 'formError':''">
-            <div th:if="${#fields.hasErrors('movieDto.searchTitle')}" th:errors="*{movieDto.searchTitle}" class="error"></div>
-        </div>
-        <h5>リリース年</h5>
-        <div style="display:inline-flex">
-            <input type="text" name="releaseYear" width="80" th:classappend="${#fields.hasErrors('movieDto.releaseYear')} ? 'formError':''">
-            <div th:if="${#fields.hasErrors('movieDto.releaseYear')}" th:errors="*{movieDto.releaseYear}" class="error"></div>
-        </div>
-        <h5>上映時間</h5>
-        <div style="display:inline-flex">
-            <input type="text" name="showTimes" width="80" th:classappend="${#fields.hasErrors('movieDto.showTimes')} ? 'formError':''">
-            <div th:if="${#fields.hasErrors('movieDto.showTimes')}" th:errors="*{movieDto.showTimes}" class="error"></div>
-        </div>
-        <h5>言語</h5>
-        <select name="originalLanguage">
-            <option th:each="language : ${languageList}" th:value="${language.value}" th:text="${language.value}" th:selected="${language.value} == *{languageList}">singleSelect</option>
-        </select>
-        <h5>出演1</h5>
-        <input type="text" name="starringNum1" width="80">
-        <h5>出演2</h5>
-        <input type="text" name="starringNum2" width="80">
-        <h5>出演3</h5>
-        <input type="text" name="starringNum3" width="80">
-        <h5>出演4</h5>
-        <input type="text" name="starringNum4" width="80">
-        <h5>閲覧済/未済</h5>
-        <select name="watchedFlg">
-            <option th:value="false" th:text="閲覧未済"></option>
-            <option th:value="true" th:text="閲覧済" th:selected="閲覧済"></option>
-        </select>
-        <div>
-            <input type="submit" value="登録" class="submitBtn">
-        </div>
-    </form>
+    <div class="contents">
+        <form action="#" th:action="@{/movies/new}" th:method="post">
+            <h5 th:class="testClass">タイトル</h5>
+            <div style="display:inline-flex">
+                <input type="text" name="title" width="80" th:classappend="${#fields.hasErrors('movieDto.title')} ? 'formError':''">
+                <div th:if="${#fields.hasErrors('movieDto.title')}" th:errors="*{movieDto.title}" class="error"></div>
+            </div>
+            <h5>検索用タイトル</h5>
+            <div style="display:inline-flex">
+                <input type="text" name="searchTitle" width="80" th:classappend="${#fields.hasErrors('movieDto.searchTitle')} ? 'formError':''">
+                <div th:if="${#fields.hasErrors('movieDto.searchTitle')}" th:errors="*{movieDto.searchTitle}" class="error"></div>
+            </div>
+            <h5>リリース年</h5>
+            <div style="display:inline-flex">
+                <input type="text" name="releaseYear" width="80" th:classappend="${#fields.hasErrors('movieDto.releaseYear')} ? 'formError':''">
+                <div th:if="${#fields.hasErrors('movieDto.releaseYear')}" th:errors="*{movieDto.releaseYear}" class="error"></div>
+            </div>
+            <h5>上映時間</h5>
+            <div style="display:inline-flex">
+                <input type="text" name="showTimes" width="80" th:classappend="${#fields.hasErrors('movieDto.showTimes')} ? 'formError':''">
+                <div th:if="${#fields.hasErrors('movieDto.showTimes')}" th:errors="*{movieDto.showTimes}" class="error"></div>
+            </div>
+            <h5>言語</h5>
+            <select name="originalLanguage">
+                <option th:each="language : ${languageList}" th:value="${language.value}" th:text="${language.value}" th:selected="${language.value} == *{languageList}">singleSelect</option>
+            </select>
+            <h5>出演1</h5>
+            <input type="text" name="starringNum1" width="80">
+            <h5>出演2</h5>
+            <input type="text" name="starringNum2" width="80">
+            <h5>出演3</h5>
+            <input type="text" name="starringNum3" width="80">
+            <h5>出演4</h5>
+            <input type="text" name="starringNum4" width="80">
+            <h5>閲覧済/未済</h5>
+            <select name="watchedFlg">
+                <option th:value="false" th:text="閲覧未済"></option>
+                <option th:value="true" th:text="閲覧済" th:selected="閲覧済"></option>
+            </select>
+            <div>
+                <input type="submit" value="登録" class="submitBtn">
+            </div>
+        </form>
 
-    <p>（注）出演者がリストにない場合は、先に俳優の登録を行ってください。<a href="/actors/new" th:target="_blank">俳優登録(工事中)</a></p>
-
-
+        <p>（注）出演者がリストにない場合は、先に俳優の登録を行ってください。<a href="/actors/new" th:target="_blank">俳優登録(工事中)</a></p>
+    </div>
 
     <div>
         <a class="return" href="/movies">キャンセル</a>
         <a class="homeLink" href="/">ホーム</a>
     </div>
+
 
 </div>
 </body>

@@ -2,6 +2,68 @@
     margin: 30px;
 }
 
-.detailHead{
+.detailHead {
     display: inline-block;
+    background-color: white;
+}
+
+.detailBody {
+    border-top: black ridge; padding: 15px;
+}
+
+.allBody {
+    background-color: azure;
+}
+
+.contents {
+    padding: 40px;
+    margin: 20px 0px 30px 15px;
+    position: relative;
+    box-sizing: border-box;
+    display:inline-block;
+    background-color: white;
+    width: 850px;
+    border-style: solid;
+    border-color: whitesmoke;
+    border-width: thin;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.1);
+}
+
+h1 {
+    background-color: #ee82ee;
+    margin: 0px;
+}
+
+h2 {
+    margin: 0px;
+    background-color: #f5f5dc;
+}
+
+h3 {
+    background-color: #d4f5d4;
+    margin: 0px;
+}
+
+h4 {
+    background-color: #f5d4e7;
+    margin: 0px;
+}
+
+h5 {
+    margin: 5px;
+}
+
+.submitBtn {
+    width: 50px;
+    height: 15px;
+}
+
+.error {
+    color: red;
+}
+
+.formError {
+    border-style: solid;
+    border-color: red;
+    border-width: thin;
 }
