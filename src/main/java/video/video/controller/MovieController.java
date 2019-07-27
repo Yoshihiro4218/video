@@ -13,6 +13,7 @@ import video.video.service.LanguageCodeService;
 import video.video.service.MovieService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/movies")
@@ -30,9 +31,12 @@ public class MovieController {
     }
 
     @GetMapping("")
-    public String getIndexList(Model model) {
-        List<MovieDto> list = movieService.indexMovieList();
+    public String getIndexList(@RequestParam(value = "page", required = false) Integer page, Model model) {
+        page = Optional.ofNullable(page).orElse(1);
+        List<MovieDto> list = movieService.indexMovieList(page, model);
         model.addAttribute("movieList", list);
+        model.addAttribute("previousPage", page - 1);
+        model.addAttribute("currentPage", page);
         return "movie/index";
     }
 

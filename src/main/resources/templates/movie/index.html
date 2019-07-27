@@ -35,6 +35,19 @@
             </tr>
             </tbody>
         </table>
+        <div style="text-align: center; margin-top: 10px;">
+            <a href="/movies" class="paging"><<  </a>
+            <a th:if="${previousPage}" th:href="@{/movies?page={page}(page=${previousPage})}" class="paging">＜</a>
+            <a th:if="${previousPage}" th:href="@{/movies?page={page}(page=${previousPage})}" class="paging">
+                <label th:text="${previousPage}"></label>
+            </a>
+            <label th:text="'['+${currentPage}+']'" class="paging"></label>
+            <a th:if="${nextPage}" th:href="@{/movies?page={page}(page=${nextPage})}" class="paging">
+                <label th:text="${nextPage}"></label>
+            </a>
+            <a th:if="${nextPage}" th:href="@{/movies?page={page}(page=${nextPage})}" class="paging">＞</a>
+            <a th:if="${maxPage}" th:href="@{/movies?page={page}(page=${maxPage})}" class="paging">  >></a>
+        </div>
     </div>
     <div>
         <a class="homeLink" href="/">ホーム</a>

@@ -53,6 +53,11 @@ h5 {
     margin: 5px;
 }
 
+.paging {
+    font-size: larger;
+    margin-right: 8px;
+}
+
 .submitBtn {
     width: 50px;
     height: 15px;

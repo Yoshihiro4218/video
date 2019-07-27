@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.client.RestTemplate;
 import video.video.dto.MovieDto;
@@ -29,9 +30,22 @@ public class MovieService {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<MovieDto> indexMovieList() {
-        List<MovieDto> list = jdbcTemplate.query("SELECT id, title, release_year, watched_flg FROM movie ORDER BY id;", MAPPER);
-        log.info("MovieList:{}", list);
+    public List<MovieDto> indexMovieList(int page, Model model) {
+            int movieSumNum = 15;
+            List<MovieDto> list = jdbcTemplate.query("SELECT id, title, release_year, watched_flg FROM movie ORDER BY id;", MAPPER);
+            log.info("MovieList:{}", list);
+            int maxPage = (int)Math.ceil((double)list.size()/(double)movieSumNum);
+            model.addAttribute("maxPage", maxPage);
+            if(page+1>maxPage) {
+                model.addAttribute("nextPage", 0);
+            }else {
+                model.addAttribute("nextPage", page + 1);
+            }
+            if(list.size()<page*movieSumNum) {
+                list = list.subList((page - 1) * movieSumNum, list.size());
+            }else{
+                list = list.subList((page - 1) * movieSumNum, page * movieSumNum);
+            }
         return list;
     }
 
