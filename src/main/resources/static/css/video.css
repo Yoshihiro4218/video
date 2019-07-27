@@ -25,6 +25,12 @@
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.1);
 }
 
+.moviePoster {
+    -webkit-box-shadow: 14px 19px 31px 1px rgba(0,0,0,0.55);
+    -moz-box-shadow: 14px 19px 31px 1px rgba(0,0,0,0.55);
+    box-shadow: 14px 19px 31px 1px rgba(0,0,0,0.55);
+}
+
 h1 {
     background-color: #ee82ee;
     margin: 0px;
