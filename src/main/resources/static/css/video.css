@@ -50,7 +50,7 @@
 .detailId:before {
     position: absolute;
     content: '';
-    bottom: -3px;
+    bottom: -8px;
     left: 0;
     width: 0;
     height: 0;
@@ -61,7 +61,7 @@
 .detailId:after {
     position: absolute;
     content: '';
-    bottom: -3px;
+    bottom: -8px;
     left: 10px;
     width: 1100%;
     border-bottom: solid 3px rgb(119, 195, 223);
