@@ -31,6 +31,12 @@
     box-shadow: 14px 19px 31px 1px rgba(0,0,0,0.55);
 }
 
+.newInput {
+    height: 150%;
+    width: 150%;
+    font-size: large;
+}
+
 h1 {
     background-color: #ee82ee;
     margin: 0px;
@@ -67,6 +73,7 @@ h5 {
 
 .error {
     color: red;
+    white-space: nowrap;
 }
 
 .formError {
