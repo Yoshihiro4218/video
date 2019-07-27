@@ -10,10 +10,11 @@
 <div layout:fragment="mainContent">
     <h2>映画詳細</h2>
     <div class="contents">
-        <h1 class="detailHead" th:text="'#' + ${movieDetail['id']}"></h1>
-        <h1 class="detailHead" th:text="${movieDetail['title']}"></h1>
+        <h3 class="detailHead detailId" th:text="'#' + ${movieDetail['id']}"></h3>
+        <h1 class="detailHead detailTitle" th:text="${movieDetail['title']}"></h1>
         <h5 class="detailHead" th:text="'（' + ${movieDetail['releaseYear']} + '年）'"></h5>
-        <button class="watchedBtn" id="watchedBtn" th:text="${movieDetail['watchedFlg']==true}? '閲覧済' : '閲覧未済'"></button>
+        <button class="watchedBtn" th:classappend="${movieDetail['watchedFlg']==true}? 'btn-gradient-active' : 'btn-gradient-inactive'" id="watchedBtn"
+                th:text="${movieDetail['watchedFlg']==true}? '閲覧済' : '閲覧未済'"></button>
 
         <div class="detailBody">
             <h5 class="detailContent" th:text="'言語：' + ${movieDetail['originalLanguage']}"></h5>
@@ -48,13 +49,15 @@
                     var res = xhr.response;
                     console.log('CLICKED!' + res);
                     if(res==="true"){
-                        console.log("trueだよ")
-                        console.log(el)
+                        console.log("trueだよ");
+                        console.log(el);
                         el.innerText = "閲覧済";
+                        el.className = "btn-gradient-active";
                     }else {
-                        console.log("falseだよ")
+                        console.log("falseだよ");
+                        console.log(el);
                         el.innerText = "閲覧未済";
-                        console.log(el)
+                        el.className = "btn-gradient-inactive";
                     }
                     
                     el.removeAttribute("disabled");
