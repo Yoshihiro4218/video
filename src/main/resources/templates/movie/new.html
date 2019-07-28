@@ -32,9 +32,11 @@
                 <div th:if="${#fields.hasErrors('movieDto.showTimes')}" th:errors="*{movieDto.showTimes}" class="error"></div>
             </div>
             <h5>言語</h5>
-            <select name="originalLanguage">
-                <option th:each="language : ${languageList}" th:value="${language.value}" th:text="${language.value}" th:selected="${language.value} == *{languageList}">singleSelect</option>
-            </select>
+            <div class="selectDiv">
+                <select name="originalLanguage">
+                    <option th:each="language : ${languageList}" th:value="${language.value}" th:text="${language.value}" th:selected="${language.value} == *{languageList}">singleSelect</option>
+                </select>
+            </div>
             <h5>出演1</h5>
             <input type="text" name="starringNum1" width="80">
             <h5>出演2</h5>

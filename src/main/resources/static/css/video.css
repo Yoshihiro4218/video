@@ -131,6 +131,27 @@ h5 {
     background-image: linear-gradient(45deg, #496dff 50%, #94e7ff 100%);
 }
 
+/* セレクトボックス */
+select::-ms-expand {
+    display: none;
+}
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin-bottom: 20px;
+    padding: 7px 30px 7px 10px;
+    font-size: 93%;
+    line-height: 1.1em;
+    border-radius: 5px;
+    border: none;
+    background-image: url(../image/icon_arrow_down.png);
+    background-repeat: no-repeat;
+    background-size: 12px 10px;
+    background-position: right 10px center;
+    background-color: #bddfff;
+}
+
 /* ボタン_灰色 */
 .btn-gradient-gray {
     display: inline-block;
