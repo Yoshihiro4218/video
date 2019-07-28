@@ -12,10 +12,10 @@
 
 .contents {
     padding: 40px;
-    margin: 20px 0px 30px 15px;
+    margin: 20px auto 30px auto;
     position: relative;
     box-sizing: border-box;
-    display:inline-block;
+    display: block;
     background-color: white;
     width: 1200px;
     border-style: solid;
