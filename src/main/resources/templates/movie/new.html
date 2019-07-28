@@ -34,6 +34,7 @@
             <h5>言語</h5>
             <div class="selectDiv">
                 <select name="originalLanguage">
+                    <option disabled selected value>選択してください</option>
                     <option th:each="language : ${languageList}" th:value="${language.value}" th:text="${language.value}" th:selected="${language.value} == *{languageList}">singleSelect</option>
                 </select>
             </div>
@@ -46,9 +47,10 @@
             <h5>出演4</h5>
             <input type="text" name="starringNum4" width="80">
             <h5>閲覧済/未済</h5>
-            <select name="watchedFlg">
+            <select name="watchedFlg">.
+                <option disabled selected value>選択してください</option>
                 <option th:value="false" th:text="閲覧未済"></option>
-                <option th:value="true" th:text="閲覧済" th:selected="閲覧済"></option>
+                <option th:value="true" th:text="閲覧済"></option>
             </select>
             <div>
                 <input type="submit" value="登録" class="btn-gradient-blue" style="margin-top: 20px; font-size: larger">
