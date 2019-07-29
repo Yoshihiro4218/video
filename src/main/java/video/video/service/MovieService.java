@@ -34,14 +34,14 @@ public class MovieService {
             int movieSumNum = 15;
             List<MovieDto> list = jdbcTemplate.query("SELECT id, title, release_year, watched_flg FROM movie ORDER BY id;", MAPPER);
             log.info("MovieList:{}", list);
-            int maxPage = (int)Math.ceil((double)list.size()/(double)movieSumNum);
+            int maxPage = (int)Math.ceil((double)list.size() / (double)movieSumNum);
             model.addAttribute("maxPage", maxPage);
-            if(page+1>maxPage) {
+            if(page + 1 > maxPage) {
                 model.addAttribute("nextPage", 0);
             }else {
                 model.addAttribute("nextPage", page + 1);
             }
-            if(list.size()<page*movieSumNum) {
+            if(list.size() < page * movieSumNum) {
                 list = list.subList((page - 1) * movieSumNum, list.size());
             }else{
                 list = list.subList((page - 1) * movieSumNum, page * movieSumNum);
