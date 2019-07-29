@@ -10,7 +10,14 @@
 <div layout:fragment="mainContent">
     <h2>映画管理</h2>
     <div class="contents">
-        <a href="/movies/new" class="btn-gradient-blue" style="margin-bottom: 10px;">新規登録</a>
+
+        <form th:action="@{/movies}" th:method="get">
+            <div class="tableHeadDiv">
+                <a href="/movies/new" class="btn-gradient-blue newBtn" style="margin-bottom: 10px;">新規登録</a>
+                <input class="searchTextBox" name="search" type="text" th:value="${search}" placeholder="映画検索">
+                <button class="btn-gradient-blue searchBtn" type="submit">検索</button>
+            </div>
+        </form>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -38,16 +45,16 @@
         </table>
         <div style="text-align: center; margin-top: 10px;">
             <a href="/movies" class="paging"><<  </a>
-            <a th:if="${previousPage}" th:href="@{/movies?page={page}(page=${previousPage})}" class="paging">＜</a>
-            <a th:if="${previousPage}" th:href="@{/movies?page={page}(page=${previousPage})}" class="paging">
+            <a th:if="${previousPage}" th:href="@{/movies?search={search}&page={page}(page=${previousPage}, search=${search})}" class="paging">＜</a>
+            <a th:if="${previousPage}" th:href="@{/movies?search={search}&page={page}(page=${previousPage}, search=${search})}" class="paging">
                 <label th:text="${previousPage}"></label>
             </a>
             <label th:text="'['+${currentPage}+']'" class="paging"></label>
-            <a th:if="${nextPage}" th:href="@{/movies?page={page}(page=${nextPage})}" class="paging">
+            <a th:if="${nextPage}" th:href="@{/movies?search={search}&page={page}(page=${nextPage}, search=${search})}" class="paging">
                 <label th:text="${nextPage}"></label>
             </a>
-            <a th:if="${nextPage}" th:href="@{/movies?page={page}(page=${nextPage})}" class="paging">＞</a>
-            <a th:if="${maxPage}" th:href="@{/movies?page={page}(page=${maxPage})}" class="paging">  >></a>
+            <a th:if="${nextPage}" th:href="@{/movies?search={search}&page={page}(page=${nextPage}, search=${search})}" class="paging">＞</a>
+            <a th:if="${maxPage}" th:href="@{/movies?search={search}&page={page}(page=${maxPage}, search=${search})}" class="paging">  >></a>
         </div>
     </div>
     <div class="underBtn">

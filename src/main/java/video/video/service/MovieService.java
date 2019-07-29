@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import video.video.dto.MovieDto;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -22,17 +23,23 @@ import java.util.List;
 public class MovieService {
 
     private final JdbcTemplate jdbcTemplate;
+
     @Autowired
     public RestTemplate restTemplate;
+
     private static final RowMapper<MovieDto> MAPPER = new BeanPropertyRowMapper<>(MovieDto.class);
 
     public MovieService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<MovieDto> indexMovieList(int page, Model model) {
+    public List<MovieDto> indexMovieList(String search, int page, Model model) {
             int movieSumNum = 15;
-            List<MovieDto> list = jdbcTemplate.query("SELECT id, title, release_year, watched_flg FROM movie ORDER BY id;", MAPPER);
+            String searchTitle = "%" + search + "%";
+            String sql = "SELECT id, title, release_year, watched_flg FROM movie WHERE title LIKE ? ORDER BY id;";
+            List<MovieDto> list = jdbcTemplate.query(sql, MAPPER, searchTitle);
+            String returnSearchTitle = Optional.ofNullable(search).orElse(null);
+            model.addAttribute("search", returnSearchTitle);
             log.info("MovieList:{}", list);
             int maxPage = (int)Math.ceil((double)list.size() / (double)movieSumNum);
             model.addAttribute("maxPage", maxPage);

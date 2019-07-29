@@ -67,6 +67,29 @@
     border-bottom: solid 3px rgb(119, 195, 223);
 }
 
+.tableHeadDiv {
+    text-align: left;
+    display: inline-block;
+    margin-bottom: 30px;
+}
+
+.newBtn {
+    display: inline-block;
+    margin-right: 250px;
+    font-size: medium;
+}
+
+.searchTextBox {
+    height: 35px;
+    width: 250px;
+    font-size: large;
+}
+
+.searchBtn {
+    height: 35px;
+    width: 80px;
+}
+
 h1 {
     background-color: #ee82ee;
     margin: 0px;
