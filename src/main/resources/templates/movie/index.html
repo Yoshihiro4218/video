@@ -12,10 +12,15 @@
     <div class="contents">
 
         <form th:action="@{/movies}" th:method="get">
+            <a href="/movies/new" class="btn-gradient-blue newBtn" style="margin-bottom: 10px;">新規登録</a>
             <div class="tableHeadDiv">
-                <a href="/movies/new" class="btn-gradient-blue newBtn" style="margin-bottom: 10px;">新規登録</a>
                 <input class="searchTextBox" name="search" type="text" th:value="${search}" placeholder="映画検索">
                 <button class="btn-gradient-blue searchBtn" type="submit">検索</button>
+
+                <input type="hidden" id="isWatchedInput" value="" name="isWatched">
+                <input type="button" class="pushed" id="watchedBtn-null" style="margin-left: 30px" onclick="watchedBtnClicked('')" value="なし">
+                <input type="button" class="noPushed" id="watchedBtn-already" onclick="watchedBtnClicked('true')" value="閲覧済">
+                <input type="button" class="noPushed" id="watchedBtn-still" onclick="watchedBtnClicked('false')" value="閲覧未済">
             </div>
         </form>
         <table class="table table-striped">
@@ -60,6 +65,29 @@
     <div class="underBtn">
         <a class="homeLink" href="/">ホーム</a>
     </div>
+    <script th:inline="javascript">
+        submitEl = document.getElementById('isWatchedInput');
+        nullEl = document.getElementById('watchedBtn-null');
+        alreadyEl = document.getElementById('watchedBtn-already');
+        stillEl = document.getElementById('watchedBtn-still');
+        function watchedBtnClicked(condition) {
+            submitEl.value = condition;
+            if(condition==="") {
+                nullEl.className = "pushed";
+                alreadyEl.className = "noPushed";
+                stillEl.className = "noPushed";
+            } else if(condition==="true") {
+                alreadyEl.className = "pushed";
+                nullEl.className = "noPushed";
+                stillEl.className = "noPushed";
+            } else if(condition==="false") {
+                stillEl.className = "pushed";
+                nullEl.className = "noPushed";
+                alreadyEl.className = "noPushed";
+            }
+        }
+
+    </script>
 </div>
 </body>
 </html>

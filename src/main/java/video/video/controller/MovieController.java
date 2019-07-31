@@ -31,7 +31,8 @@ public class MovieController {
     }
 
     @GetMapping("")
-    public String getIndexList(@RequestParam(value = "search", required = false) String search, @RequestParam(value = "page", required = false) Integer page, Model model) {
+    public String getIndexList(@RequestParam(value = "search", required = false) String search,
+                               @RequestParam(value = "page", required = false) Integer page, Model model) {
         page = Optional.ofNullable(page).orElse(1);
         search = Optional.ofNullable(search).orElse("%");
         List<MovieDto> list = movieService.indexMovieList(search, page, model);

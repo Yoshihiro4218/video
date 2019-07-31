@@ -69,7 +69,6 @@
 
 .tableHeadDiv {
     text-align: left;
-    display: inline-block;
     margin-bottom: 30px;
 }
 
@@ -88,6 +87,7 @@
 .searchBtn {
     height: 35px;
     width: 80px;
+    display: inline-block;
 }
 
 h1 {
@@ -217,7 +217,7 @@ select {
 }
 
 /* ボタン_活性 */
-.btn-gradient-active {
+.btn-gradient-active, .pushed {
     display: inline-block;
     padding: 0.5em 1em;
     text-decoration: none;
@@ -246,6 +246,38 @@ select {
 
 .btn-gradient-inactive:hover {
     background-image: linear-gradient(45deg, #cdbc83 50%, #b4b25a 100%);
+}
+
+/* ボタン_トグル_ON */
+.btn-gradient-toggle-on {
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 3px;
+    font-weight: bold;
+    color: #FFF;
+    background-image: linear-gradient(45deg, #d6d6d5 0%, #9c9ecf 100%);
+    transition: .4s;
+}
+
+.btn-gradient-toggle-on:hover {
+    background-image: linear-gradient(45deg, #e5e2e6 50%, #f7f9fb 100%);
+}
+
+/* ボタン_pushed */
+.noPushed {
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 3px;
+    font-weight: bold;
+    color: #FFF;
+    background-image: linear-gradient(45deg, #70706f 0%, #6f7093 100%);
+    transition: .4s;
+}
+
+.noPushed:hover {
+    background-image: linear-gradient(45deg, #7e7d7f 50%, #7d7e7f 100%);
 }
 
 /* テーブル */
