@@ -33,13 +33,19 @@ public class MovieService {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<MovieDto> indexMovieList(String search, int page, Model model) {
+    public List<MovieDto> indexMovieList(String search, int page, Boolean isWatched, Model model) {
             int movieSumNum = 15;
+            List<MovieDto> list;
             String searchTitle = "%" + search + "%";
-            String sql = "SELECT id, title, release_year, watched_flg FROM movie WHERE title LIKE ? ORDER BY id;";
-            List<MovieDto> list = jdbcTemplate.query(sql, MAPPER, searchTitle);
+            if(Optional.ofNullable(isWatched).isPresent()) {
+            String sql = "SELECT id, title, release_year, watched_flg FROM movie WHERE title LIKE ? AND watched_flg = ? ORDER BY id";
+            list = jdbcTemplate.query(sql, MAPPER, searchTitle, isWatched);
+            } else {
+                String sql = "SELECT id, title, release_year, watched_flg FROM movie WHERE title LIKE ? ORDER BY id";
+                list = jdbcTemplate.query(sql, MAPPER, searchTitle);
+            }
             String returnSearchTitle = Optional.ofNullable(search).orElse(null);
-            model.addAttribute("search", returnSearchTitle);
+            if(!returnSearchTitle.equals("%"))model.addAttribute("search", returnSearchTitle);
             log.info("MovieList:{}", list);
             int maxPage = (int)Math.ceil((double)list.size() / (double)movieSumNum);
             model.addAttribute("maxPage", maxPage);

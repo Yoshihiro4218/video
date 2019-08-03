@@ -17,7 +17,7 @@
                 <input class="searchTextBox" name="search" type="text" th:value="${search}" placeholder="映画検索">
                 <button class="btn-gradient-blue searchBtn" type="submit">検索</button>
 
-                <input type="hidden" id="isWatchedInput" value="" name="isWatched">
+                <input type="hidden" id="isWatchedInput" name="isWatched">
                 <input type="button" class="pushed" id="watchedBtn-null" style="margin-left: 30px" onclick="watchedBtnClicked('')" value="なし">
                 <input type="button" class="noPushed" id="watchedBtn-already" onclick="watchedBtnClicked('true')" value="閲覧済">
                 <input type="button" class="noPushed" id="watchedBtn-still" onclick="watchedBtnClicked('false')" value="閲覧未済">
@@ -70,13 +70,10 @@
         nullEl = document.getElementById('watchedBtn-null');
         alreadyEl = document.getElementById('watchedBtn-already');
         stillEl = document.getElementById('watchedBtn-still');
+        watchedBtnClicked("[[${isWatched}]]");
         function watchedBtnClicked(condition) {
             submitEl.value = condition;
-            if(condition==="") {
-                nullEl.className = "pushed";
-                alreadyEl.className = "noPushed";
-                stillEl.className = "noPushed";
-            } else if(condition==="true") {
+            if(condition==="true") {
                 alreadyEl.className = "pushed";
                 nullEl.className = "noPushed";
                 stillEl.className = "noPushed";
@@ -84,9 +81,13 @@
                 stillEl.className = "pushed";
                 nullEl.className = "noPushed";
                 alreadyEl.className = "noPushed";
+            } else {
+                nullEl.className = "pushed";
+                alreadyEl.className = "noPushed";
+                stillEl.className = "noPushed";
+                submitEl.value = "";
             }
         }
-
     </script>
 </div>
 </body>

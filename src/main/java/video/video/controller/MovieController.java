@@ -32,11 +32,14 @@ public class MovieController {
 
     @GetMapping("")
     public String getIndexList(@RequestParam(value = "search", required = false) String search,
-                               @RequestParam(value = "page", required = false) Integer page, Model model) {
+                               @RequestParam(value = "page", required = false) Integer page,
+                               @RequestParam(value = "isWatched", required = false) Boolean isWatched,
+                               Model model) {
         page = Optional.ofNullable(page).orElse(1);
         search = Optional.ofNullable(search).orElse("%");
-        List<MovieDto> list = movieService.indexMovieList(search, page, model);
+        List<MovieDto> list = movieService.indexMovieList(search, page, isWatched, model);
         model.addAttribute("movieList", list);
+        model.addAttribute("isWatched", isWatched);
         model.addAttribute("previousPage", page - 1);
         model.addAttribute("currentPage", page);
         return "movie/index";
