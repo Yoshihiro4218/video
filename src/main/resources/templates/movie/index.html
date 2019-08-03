@@ -18,9 +18,9 @@
                 <button class="btn-gradient-blue searchBtn" type="submit">検索</button>
 
                 <input type="hidden" id="isWatchedInput" name="isWatched">
-                <input type="button" class="pushed" id="watchedBtn-null" style="margin-left: 30px" onclick="watchedBtnClicked('')" value="なし">
-                <input type="button" class="noPushed" id="watchedBtn-already" onclick="watchedBtnClicked('true')" value="閲覧済">
-                <input type="button" class="noPushed" id="watchedBtn-still" onclick="watchedBtnClicked('false')" value="閲覧未済">
+                <a type="button" th:href="@{/movies?search={search}(search=${search})}" class="pushed" id="watchedBtn-null" style="margin-left: 30px" onclick="watchedBtnClicked('')" value="なし" th:text="なし"></a>
+                <a type="button" th:href="@{/movies?search={search}&isWatched=true(search=${search})}" class="noPushed" id="watchedBtn-already" onclick="watchedBtnClicked('true')" value="閲覧済" th:text="閲覧済"></a>
+                <a type="button" th:href="@{/movies?search={search}&isWatched=false(search=${search})}" class="noPushed" id="watchedBtn-still" onclick="watchedBtnClicked('false')" value="閲覧未済" th:text="閲覧未済"></a>
             </div>
         </form>
         <table class="table table-striped">
