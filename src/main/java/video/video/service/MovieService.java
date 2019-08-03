@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.client.RestTemplate;
 import video.video.dto.MovieDto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,7 +72,7 @@ public class MovieService {
 
     public List showActorDetailWithMovie(MovieDto movie) {
         String actorSql;
-        List actorList = null;
+        List actorList = new ArrayList();
         if(movie.getStarringNum4()!=null){
             actorSql = "SELECT actor.name FROM movie JOIN actor ON " +
                     "movie.starring_num1 = actor.id " +
