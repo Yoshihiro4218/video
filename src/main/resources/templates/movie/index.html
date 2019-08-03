@@ -41,9 +41,7 @@
                 <td th:classappend="${movie['watchedFlg']==true}? 'activeText' : 'inactiveText'"
                     th:text="${movie['watchedFlg']==true}? '閲覧済' : '閲覧未済'"></td>
                 <td>
-                    <form th:action="@{/movies/{id}(id=${movie['id']})}" th:method="get">
-                        <input type="submit" value="詳細を表示" class="btn-gradient-gray" style="width: 100%; height: 150%;" />
-                    </form>
+                    <a type="button" th:text="詳細を表示" th:href="@{/movies/{id}(id=${movie['id']})}" class="btn-gradient-gray" style="width: 85%;"></a>
                 </td>
             </tr>
             </tbody>
