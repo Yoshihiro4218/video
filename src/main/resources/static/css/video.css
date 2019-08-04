@@ -84,6 +84,12 @@
     font-size: large;
 }
 
+.releaseYearBox {
+    height: 35px;
+    width:80px;
+    font-size: medium;
+}
+
 .searchBtn {
     height: 35px;
     width: 80px;
