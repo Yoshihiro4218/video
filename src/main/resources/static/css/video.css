@@ -96,6 +96,10 @@
     display: inline-block;
 }
 
+.clearBtn {
+    margin-left: 100px;
+}
+
 h1 {
     background-color: #ee82ee;
     margin: 0px;
