@@ -34,10 +34,12 @@ public class MovieController {
     public String getIndexList(@RequestParam(value = "search", required = false) String search,
                                @RequestParam(value = "page", required = false) Integer page,
                                @RequestParam(value = "isWatched", required = false) Boolean isWatched,
+                               @RequestParam(value = "year", required = false) Integer year,
                                Model model) {
         page = Optional.ofNullable(page).orElse(1);
         search = Optional.ofNullable(search).orElse("%");
-        List<MovieDto> list = movieService.indexMovieList(search, page, isWatched, model);
+        Optional<Integer> maybeYear = Optional.ofNullable(year);
+        List<MovieDto> list = movieService.indexMovieList(search, page, isWatched, maybeYear, model);
         model.addAttribute("movieList", list);
         model.addAttribute("isWatched", isWatched);
         model.addAttribute("previousPage", page - 1);

@@ -34,16 +34,26 @@ public class MovieService {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<MovieDto> indexMovieList(String search, int page, Boolean isWatched, Model model) {
+    public List<MovieDto> indexMovieList(String search, int page, Boolean isWatched, Optional<Integer> maybeYear, Model model) {
             int movieSumNum = 15;
             List<MovieDto> list;
             String searchTitle = "%" + search + "%";
-            if(Optional.ofNullable(isWatched).isPresent()) {
-            String sql = "SELECT id, title, release_year, watched_flg FROM movie WHERE title LIKE ? AND watched_flg = ? ORDER BY id";
-            list = jdbcTemplate.query(sql, MAPPER, searchTitle, isWatched);
+            int yearBegin;
+            int yearEnd;
+            if(maybeYear.isPresent()) {
+                yearBegin = maybeYear.get();
+                yearEnd = maybeYear.get();
+                model.addAttribute("year", maybeYear.get());
             } else {
-                String sql = "SELECT id, title, release_year, watched_flg FROM movie WHERE title LIKE ? ORDER BY id";
-                list = jdbcTemplate.query(sql, MAPPER, searchTitle);
+                yearBegin = 0;
+                yearEnd = 9999;
+            }
+            if(Optional.ofNullable(isWatched).isPresent()) {
+            String sql = "SELECT id, title, release_year, watched_flg FROM movie WHERE title LIKE ? AND watched_flg = ? AND release_year BETWEEN ? AND ? ORDER BY id";
+            list = jdbcTemplate.query(sql, MAPPER, searchTitle, isWatched, yearBegin, yearEnd);
+            } else {
+                String sql = "SELECT id, title, release_year, watched_flg FROM movie WHERE title LIKE ? AND release_year BETWEEN ? AND ? ORDER BY id";
+                list = jdbcTemplate.query(sql, MAPPER, searchTitle, yearBegin, yearEnd);
             }
             String returnSearchTitle = Optional.ofNullable(search).orElse(null);
             if(!returnSearchTitle.equals("%"))model.addAttribute("search", returnSearchTitle);
