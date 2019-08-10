@@ -8,6 +8,8 @@
 
 .allBody {
     background-color: azure;
+    background-image: url("/image/spring_boot_logo.png");
+    background-attachment: fixed;
 }
 
 .contents {
