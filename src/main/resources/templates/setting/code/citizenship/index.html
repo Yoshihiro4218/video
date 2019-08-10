@@ -18,27 +18,29 @@
     <h2>マスタ設定</h2>
     <h3>コードマスタ設定</h3>
     <h4>国籍マスタ設定</h4>
-    <a href="/settings/codes/citizenships//new">新規登録</a>
-    <table class="table table-striped" border="1">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>国籍</th>
-            <th>削除</th>
-        </tr>
-        </thead>
-        <tbody th:remove="all-but-first" th:each="citizenship: ${citizenships}" th:object="${citizenship}">
-        <tr>
-            <td th:text="'#' + ${citizenship['id']}"></td>
-            <td th:text="${citizenship['value']}"></td>
-            <td>
-                <form th:action="@{/settings/codes/citizenships/{id}(id=${citizenship['id']})}" th:method="post">
-                    <input type="submit" value="削除" />
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="contents">
+        <a href="/settings/codes/citizenships//new">新規登録</a>
+        <table class="table table-striped" border="1">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>国籍</th>
+                <th>削除</th>
+            </tr>
+            </thead>
+            <tbody th:remove="all-but-first" th:each="citizenship: ${citizenships}" th:object="${citizenship}">
+            <tr>
+                <td th:text="'#' + ${citizenship['id']}"></td>
+                <td th:text="${citizenship['value']}"></td>
+                <td>
+                    <form th:action="@{/settings/codes/citizenships/{id}(id=${citizenship['id']})}" th:method="post">
+                        <input type="submit" value="削除" />
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
     <div class="underBtn">
         <a class="homeLink" href="/">ホーム</a>
         <a class="return" href="/settings/codes">戻る</a>

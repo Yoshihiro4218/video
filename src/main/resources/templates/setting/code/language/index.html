@@ -25,27 +25,29 @@
     <h2>マスタ設定</h2>
     <h3>コードマスタ設定</h3>
     <h4>言語マスタ設定</h4>
-    <a href="/settings/codes/language/new">新規登録</a>
-    <table class="table table-striped" border="1">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>言語</th>
-            <th>削除</th>
-        </tr>
-        </thead>
-        <tbody th:remove="all-but-first" th:each="language: ${languages}" th:object="${language}">
-        <tr>
-            <td th:text="'#' + ${language['id']}"></td>
-            <td th:text="${language['value']}"></td>
-            <td>
-                <form th:action="@{/settings/codes/languages/{id}(id=${language['id']})}" th:method="post">
-                    <input type="submit" value="削除" />
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="contents">
+        <a href="/settings/codes/language/new">新規登録</a>
+        <table class="table table-striped" border="1">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>言語</th>
+                <th>削除</th>
+            </tr>
+            </thead>
+            <tbody th:remove="all-but-first" th:each="language: ${languages}" th:object="${language}">
+            <tr>
+                <td th:text="'#' + ${language['id']}"></td>
+                <td th:text="${language['value']}"></td>
+                <td>
+                    <form th:action="@{/settings/codes/languages/{id}(id=${language['id']})}" th:method="post">
+                        <input type="submit" value="削除" />
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
     <div class="underBtn">
         <a class="homeLink" href="/">ホーム</a>
         <a class="return" href="/settings/codes">戻る</a>
