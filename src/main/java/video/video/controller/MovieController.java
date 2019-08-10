@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import video.video.dto.LanguageCodeDto;
 import video.video.dto.MovieDto;
 import video.video.service.CitizenshipCodeService;
@@ -86,5 +87,13 @@ public class MovieController {
         }
         int movieId = movieService.createNewMovie(movieDto);
         return "redirect:/movies/" + movieId;
+    }
+
+    @PostMapping("/{id}/delete")
+    public String deleteMovie(@PathVariable("id") int movieId, RedirectAttributes attributes) {
+        int res = movieService.deleteMovie(movieId);
+        attributes.addAttribute("deleteMovieId", movieId);
+        attributes.addAttribute("deleteOk", res);
+        return "redirect:/movies";
     }
 }

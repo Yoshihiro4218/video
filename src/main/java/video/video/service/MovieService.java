@@ -175,4 +175,9 @@ public class MovieService {
         int movieId = jdbcTemplate.queryForObject(selectMovieIdSql, int.class);
         return movieId;
     }
+
+    public int deleteMovie(int movieId) {
+        String sql = "DELETE FROM movie WHERE id = ?";
+        return jdbcTemplate.update(sql, movieId);
+    }
 }
