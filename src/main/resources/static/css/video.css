@@ -178,6 +178,7 @@ h5 {
 }
 
 .modal-content{
+    text-align: center;
     background-color: white;
     width: 500px;
     margin: 40% auto;
@@ -310,7 +311,7 @@ select {
 }
 
 /* ボタン_pushed */
-.noPushed {
+.noPushed, .cancelBtn {
     display: inline-block;
     padding: 0.5em 1em;
     text-decoration: none;
@@ -321,7 +322,7 @@ select {
     transition: .4s;
 }
 
-.noPushed:hover {
+.noPushed:hover, .cancelBtn:hover {
     background-image: linear-gradient(45deg, #7e7d7f 50%, #7d7e7f 100%);
 }
 
