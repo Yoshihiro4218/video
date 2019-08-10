@@ -166,6 +166,23 @@ h5 {
     background-image: linear-gradient(45deg, #496dff 50%, #94e7ff 100%);
 }
 
+.modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content{
+    background-color: white;
+    width: 500px;
+    margin: 40% auto;
+}
+
 /* セレクトボックス */
 select::-ms-expand {
     display: none;
@@ -217,6 +234,22 @@ select {
 
 .btn-gradient-pink:hover, .homeLink:hover, .return:hover {
     background-image: linear-gradient(45deg, #f67afa 50%, #ffc7e8 100%);
+}
+
+/* ボタン_赤 */
+.deleteBtn{
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 3px;
+    font-weight: bold;
+    color: #FFF;
+    background-image: linear-gradient(45deg, #d50d3c 0%, #feaabb 100%);
+    transition: .4s;
+}
+
+.deleteBtn:hover {
+    background-image: linear-gradient(45deg, #fa7580 50%, #caa3ad 100%);
 }
 
 .underBtn {

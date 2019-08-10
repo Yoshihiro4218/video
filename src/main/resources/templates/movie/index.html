@@ -25,6 +25,9 @@
                 <a class="btn-gradient-blue clearBtn" type="button" href="/movies">クリア</a>
             </div>
         </form>
+
+        <div th:if="${deleteOk}==1" th:text="${deleteMovieId} + '番を削除しました' " style="color: red"></div>
+
         <table class="table table-striped">
             <thead>
             <tr>

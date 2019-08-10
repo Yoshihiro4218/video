@@ -92,8 +92,8 @@ public class MovieController {
     @PostMapping("/{id}/delete")
     public String deleteMovie(@PathVariable("id") int movieId, RedirectAttributes attributes) {
         int res = movieService.deleteMovie(movieId);
-        attributes.addAttribute("deleteMovieId", movieId);
-        attributes.addAttribute("deleteOk", res);
+        attributes.addFlashAttribute("deleteMovieId", movieId);
+        attributes.addFlashAttribute("deleteOk", res);
         return "redirect:/movies";
     }
 }

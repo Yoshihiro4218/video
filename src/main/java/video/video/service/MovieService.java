@@ -35,7 +35,7 @@ public class MovieService {
     }
 
     public List<MovieDto> indexMovieList(String search, int page, Boolean isWatched, Optional<Integer> maybeYear, Model model) {
-            int movieSumNum = 15;
+            int onePageMoviesVolume = 15;
             List<MovieDto> list;
             String searchTitle = "%" + search + "%";
             int yearBegin;
@@ -58,17 +58,17 @@ public class MovieService {
             String returnSearchTitle = Optional.ofNullable(search).orElse(null);
             if(!returnSearchTitle.equals("%"))model.addAttribute("search", returnSearchTitle);
             log.info("MovieList:{}", list);
-            int maxPage = (int)Math.ceil((double)list.size() / (double)movieSumNum);
+            int maxPage = (int)Math.ceil((double)list.size() / (double)onePageMoviesVolume);
             model.addAttribute("maxPage", maxPage);
             if(page + 1 > maxPage) {
                 model.addAttribute("nextPage", 0);
             }else {
                 model.addAttribute("nextPage", page + 1);
             }
-            if(list.size() < page * movieSumNum) {
-                list = list.subList((page - 1) * movieSumNum, list.size());
+            if(list.size() < page * onePageMoviesVolume) {
+                list = list.subList((page - 1) * onePageMoviesVolume, list.size());
             }else{
-                list = list.subList((page - 1) * movieSumNum, page * movieSumNum);
+                list = list.subList((page - 1) * onePageMoviesVolume, page * onePageMoviesVolume);
             }
         return list;
     }

@@ -15,6 +15,19 @@
         <h5 class="detailHead" th:text="'（' + ${movieDetail['releaseYear']} + '年）'"></h5>
         <button class="watchedBtn" th:classappend="${movieDetail['watchedFlg']==true}? 'btn-gradient-active' : 'btn-gradient-inactive'" id="watchedBtn"
                 th:text="${movieDetail['watchedFlg']==true}? '閲覧済' : '閲覧未済'"></button>
+        <button class="deleteBtn" th:attr="onclick='clickDeleteBtn(' + ${movieDetail['id']} + ');'"  >削除</button>
+
+        <div id="modal" class="modal" style="display: none">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h1>削除してもよろしいですか？</h1>
+                    <form id="deleteForm" th:method="post">
+                        <input class="pinkBtn" type="submit" value="削除" />
+                    </form>
+                    <input class="pinkBtn" type="submit" value="キャンセル" th:onclick="clickDeleteBtn(0)" />
+                </div>
+            </div>
+        </div>
 
         <div class="detailBody">
             <h5 class="detailContent" th:text="'言語：' + ${movieDetail['originalLanguage']}"></h5>
@@ -26,10 +39,6 @@
         </div>
         <img th:src="${imageUrl}" class="moviePoster">
 
-
-    <!--    <button id='goodBtn' th:text="'いいね！：'+${article['good']} + '回'"></button>-->
-    <!--    <pre th:text="${article['body']}" style="border-top: black ridge; padding: 15px;"></pre>-->
-    <!--    <a class="newArticle" th:href="@{/blogs/edit/{id}(id=${article['id']})}">記事を編集</a>-->
     </div>
 
     <div class="underBtn">
@@ -65,6 +74,22 @@
         }
         var el = document.getElementById('watchedBtn');
         el.addEventListener('click', watchedBtnClick);
+
+        var condition = false;
+        function clickDeleteBtn(id) {
+            console.log(id);
+            var el = document.getElementById('modal');
+            if (condition) {
+                el.setAttribute('style', 'display: none');
+                condition = false;
+            } else {
+                el.removeAttribute('style');
+                var formEl = document.getElementById('deleteForm');
+                var actionStr = '/movies/' + id + '/delete';
+                formEl.setAttribute('action', actionStr);
+                condition = true;
+            }
+        }
     </script>
 
 </div>
