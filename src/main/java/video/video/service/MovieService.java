@@ -35,7 +35,6 @@ public class MovieService {
     }
 
     public List<MovieDto> indexMovieList(String search, int page, Boolean isWatched, Optional<Integer> maybeYear, Model model) {
-            int onePageMoviesVolume = 15;
             List<MovieDto> list;
             String searchTitle = "%" + search + "%";
             int yearBegin;
@@ -58,18 +57,8 @@ public class MovieService {
             String returnSearchTitle = Optional.ofNullable(search).orElse(null);
             if(!returnSearchTitle.equals("%"))model.addAttribute("search", returnSearchTitle);
             log.info("MovieList:{}", list);
-            int maxPage = (int)Math.ceil((double)list.size() / (double)onePageMoviesVolume);
-            model.addAttribute("maxPage", maxPage);
-            if(page + 1 > maxPage) {
-                model.addAttribute("nextPage", 0);
-            }else {
-                model.addAttribute("nextPage", page + 1);
-            }
-            if(list.size() < page * onePageMoviesVolume) {
-                list = list.subList((page - 1) * onePageMoviesVolume, list.size());
-            }else{
-                list = list.subList((page - 1) * onePageMoviesVolume, page * onePageMoviesVolume);
-            }
+            list = pageCal(list, page, model);
+
         return list;
     }
 
@@ -179,5 +168,22 @@ public class MovieService {
     public int deleteMovie(int movieId) {
         String sql = "DELETE FROM movie WHERE id = ?";
         return jdbcTemplate.update(sql, movieId);
+    }
+
+    private List<MovieDto> pageCal(List<MovieDto> list, int page, Model model) {
+        int onePageMoviesVolume = 15;
+        int maxPage = (int)Math.ceil((double)list.size() / (double)onePageMoviesVolume);
+        model.addAttribute("maxPage", maxPage);
+        if(page + 1 > maxPage) {
+            model.addAttribute("nextPage", 0);
+        }else {
+            model.addAttribute("nextPage", page + 1);
+        }
+        if(list.size() < page * onePageMoviesVolume) {
+            list = list.subList((page - 1) * onePageMoviesVolume, list.size());
+        }else{
+            list = list.subList((page - 1) * onePageMoviesVolume, page * onePageMoviesVolume);
+        }
+        return list;
     }
 }
