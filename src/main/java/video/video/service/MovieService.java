@@ -160,7 +160,7 @@ public class MovieService {
                 movieDto.getOriginalLanguage(), movieDto.getStarringNum1(), movieDto.getStarringNum2(), movieDto.getStarringNum3(),
                 movieDto.getStarringNum4(), movieDto.isWatchedFlg());
 
-        String selectMovieIdSql = "SELECT MAX(id) FROM movie;";
+        String selectMovieIdSql = "SELECT LAST_INSERT_ID();";
         int movieId = jdbcTemplate.queryForObject(selectMovieIdSql, int.class);
         return movieId;
     }
