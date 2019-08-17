@@ -181,7 +181,7 @@ public class MovieService {
         }
         if(list.size() < page * onePageMoviesVolume) {
             list = list.subList((page - 1) * onePageMoviesVolume, list.size());
-        }else{
+        } else {
             list = list.subList((page - 1) * onePageMoviesVolume, page * onePageMoviesVolume);
         }
         return list;
