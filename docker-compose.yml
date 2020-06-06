@@ -1,23 +1,15 @@
-version: '3'
+version: '2'
 
 services:
-  app:
-    image: nginx
-    ports:
-      - 80:8443    # localhost only by default
-    volumes: ./
-    # command: ""
-
-  https-portal:
-    image: steveltn/https-portal:1
-    ports:
-      - '443:443'
-    links:
-      - app
-    depends_on:
-      - app
-    restart: unless-stopped
+  db:
+    image: mysql:8.0.17
     environment:
-      DOMAINS: '54.95.56.31 -> http://app:8443'
-      STAGE: local
-      SERVER_NAMES_HASH_BUCKET_SIZE: 128
+      MYSQL_DATABASE: 'video'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'root_password'
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+      - ./docker/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d

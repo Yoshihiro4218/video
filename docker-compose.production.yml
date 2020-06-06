@@ -1,0 +1,41 @@
+version: '2'
+
+services:
+  https-portal:
+    image: steveltn/https-portal:1
+    ports:
+      - '80:80'
+      - '443:443'
+    links:
+      - app
+    # restart: always
+    environment:
+      DOMAINS: 'fuga.kadono.work -> http://app:8080'
+      STAGE: 'production'
+    volumes:
+      - ./org-chimata-ssl-certs:/var/lib/https-portal
+
+  db:
+    image: mysql:8.0.17
+    environment:
+      MYSQL_DATABASE: 'video'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'root_password'
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+      - ./docker/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+
+  app:
+    build: ./
+    ports:
+      - "8080:8080"
+    environment:
+      spring.datasource.driverClassName: "com.mysql.cj.jdbc.Driver"
+      spring.datasource.url: "jdbc:mysql://db/video?useUnicode=true&userJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"
+      spring.datasource.username: "user"
+      spring.datasource.password: "password"
+    depends_on:
+      - db
